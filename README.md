@@ -1,2 +1,2 @@
 # nba-daily
-Get recent games' summary and video in a easy formate.
+Get recent games' summary and video in a easy format.
