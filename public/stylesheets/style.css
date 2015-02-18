@@ -1,0 +1,47 @@
+/* line 3, ../sass/style.scss */
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/* line 8, ../sass/style.scss */
+a {
+  color: #666;
+}
+
+/* line 12, ../sass/style.scss */
+nav {
+  float: right;
+}
+/* line 14, ../sass/style.scss */
+nav a {
+  color: #00B7FF;
+}
+
+/* line 19, ../sass/style.scss */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* line 24, ../sass/style.scss */
+.videos {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* line 29, ../sass/style.scss */
+.video {
+  width: 200px;
+  height: auto;
+  margin: 0 20px 30px 0;
+}
+/* line 33, ../sass/style.scss */
+.video img {
+  width: 100%;
+}
+/* line 36, ../sass/style.scss */
+.video label {
+  font-size: 0.8rem;
+  color: #666;
+}
