@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Highlights</a>
+      <a href="/daily-zap">Daily Zap</a>
+      <a href="/top-10">Top 10</a>
+    </nav>
+    <h1>{{title}}</h1>
+    <ul class="videos">
+      {{#each videos}}
+        <li class="video">
+          <a href="{{url}}" title="{{title}}">
+            <img src="{{metadata.media.600x336.uri}}" alt="{{alt}}"/>
+            <label>{{title}}</label>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </body>
+</html>

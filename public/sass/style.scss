@@ -1,0 +1,40 @@
+@import "compass/css3";
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #666;
+}
+
+nav {
+  float: right;
+  a {
+    color: #00B7FF;
+  }
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.videos {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.video {
+  width: 200px;
+  height: auto;
+  margin: 0 20px 30px 0;
+  img {
+    width: 100%;
+  }
+  label {
+    font-size: 0.8rem;
+    color: #666;
+  }
+}

@@ -33,8 +33,14 @@ router.get('/', function(req, res, next) {
       }
       return false;
     });
-
-    res.send(ret);
+    if (req.xhr) {
+      res.send(ret);
+    } else {
+      res.render('index', {
+        title: 'Game Highlights',
+        videos: ret
+      });
+    }
   });
 });
 
