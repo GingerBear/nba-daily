@@ -11,7 +11,14 @@ router.get('/', function(req, res, next) {
     getPage(1, 50),
     parsePage()
   ], function(err, result) {
-    res.json(result);
+    if (req.xhr) {
+      res.send(result.results[0]);
+    } else {
+      res.render('index', {
+        title: 'Daily Zap',
+        videos: result.results[0]
+      });
+    }
   })
 });
 

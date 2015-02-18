@@ -15,10 +15,13 @@ router.get('*', function(req, res, next) {
     getPage(path),
     parsePage()
   ], function(err, result) {
-    res.send(result);
+    if (req.xhr) {
+      res.send(result);
+    } else {
+      res.render('video', result)
+    }
   })
 });
-
 
 function getPage(path) {
   return function(callback) {
@@ -42,7 +45,7 @@ function parsePage() {
       description: $video.find('[itemprop="description"]').attr('content'),
       thumbnailUrl: $video.find('[itemprop="thumbnailUrl"]').attr('content'),
       duration: $video.find('[itemprop="duration"]').attr('content')
-    }
+    };
 
     callback(null, json);
   }
