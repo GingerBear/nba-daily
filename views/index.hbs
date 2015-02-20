@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <nav>
-      <a href="/">Highlights</a>
-      <a href="/daily-zap">Daily Zap</a>
-      <a href="/top-10">Top 10</a>
-    </nav>
-    <h1>{{title}}</h1>
-    <ul class="videos">
-      {{#each videos}}
-        <li class="video">
-          <a href="{{url}}" title="{{title}}">
-            <img src="{{metadata.media.600x336.uri}}" alt="{{alt}}"/>
-            <label>{{title}}</label>
-          </a>
-        </li>
-      {{/each}}
-    </ul>
-  </body>
-</html>
+<h1>{{title}}</h1>
+
+<div class="standings">
+  <h2>Standings</h2>
+  <div class="content">
+    Loading...
+  </div>
+</div>
+
+<ul class="videos">
+  {{#each videos}}
+    <li class="video">
+      <a href="{{url}}" title="{{title}}">
+        <img src="{{metadata.media.600x336.uri}}" alt="{{alt}}"/>
+        <label>{{title}}</label>
+      </a>
+    </li>
+  {{/each}}
+</ul>
+
+<script type="text/x-handlebars" data-template-name="standings">
+  <h4>Eastern</h4>
+  <ol class="eastern">
+    \{{#each eastern}}
+      <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
+    \{{/each}}
+  </ol>
+  <h4>Western</h4>
+  <ol class="western">
+    \{{#each western}}
+      <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
+    \{{/each}}
+  </ol>
+</script>

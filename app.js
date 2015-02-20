@@ -9,12 +9,13 @@ var routes = require('./routes/index');
 var dailyZap = require('./routes/dailyZap');
 var topTen = require('./routes/topTen');
 var video = require('./routes/video');
-var standing = require('./routes/standing');
+var standings = require('./routes/standings');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('view options', {layout: 'layout'});
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
@@ -30,7 +31,7 @@ app.use('/', routes);
 app.use('/daily-zap', dailyZap);
 app.use('/top-10', topTen);
 app.use('/video', video);
-app.use('/standing', standing);
+app.use('/standings', standings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
