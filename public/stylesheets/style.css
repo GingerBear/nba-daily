@@ -45,3 +45,35 @@ ul {
   font-size: 0.8rem;
   color: #666;
 }
+
+/* line 42, ../sass/style.scss */
+.standings {
+  float: right;
+  width: 220px;
+}
+/* line 45, ../sass/style.scss */
+.standings h2 {
+  margin-top: 0;
+}
+/* line 48, ../sass/style.scss */
+.standings ol li:nth-of-type(8) {
+  margin-bottom: 10px;
+}
+/* line 51, ../sass/style.scss */
+.standings .team {
+  width: 120px;
+  display: inline-block;
+}
+/* line 55, ../sass/style.scss */
+.standings .win, .standings .lose {
+  width: 30px;
+  display: inline-block;
+}
+/* line 59, ../sass/style.scss */
+.standings .win {
+  color: #006600;
+}
+/* line 62, ../sass/style.scss */
+.standings .lose {
+  color: #880000;
+}

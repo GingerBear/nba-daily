@@ -38,3 +38,28 @@ ul {
     color: #666;
   }
 }
+
+.standings {
+  float: right;
+  width: 220px;
+  h2 {
+    margin-top: 0;
+  }
+  ol li:nth-of-type(8) {
+    margin-bottom: 10px;
+  }
+  .team {
+    width: 120px;
+    display: inline-block;
+  }
+  .win, .lose {
+    width: 30px;
+    display: inline-block;
+  }
+  .win {
+    color: #006600;
+  }
+  .lose {
+    color: #880000;
+  }
+}
