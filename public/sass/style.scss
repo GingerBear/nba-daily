@@ -63,3 +63,63 @@ ul {
     color: #880000;
   }
 }
+
+.video-player {
+  width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  body {
+    padding: 10px;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
+  .standings {
+    float: none;
+    width: auto;
+    overflow: hidden;
+    h2 {
+      font-size: 1rem;
+      text-align: right;
+      text-decoration: underline;
+      margin-bottom: 5px;
+      cursor: pointer;
+      color: #00B7FF;
+    }
+    .content.show {
+      display: block;
+    }
+    .content {
+      display: none;
+      font-size: 0.7rem;
+      ol {
+        padding-left: 20px;
+      }
+      .team {
+        width: 85px;
+      }
+      .win, .lose {
+        width: 20px;
+      }
+    }
+    .eastern {
+      margin-right: 10px;
+    }
+    .eastern, .western {
+      float: left;
+      width: 48%;
+    }
+  }
+  .videos {
+    display: block;
+  }
+  .video {
+    width: 48%;
+    display: inline-block;
+    margin: 0 2% 20px 0;
+  }
+  .video:nth-child(even) {
+    margin-right: 0;
+  }
+}
