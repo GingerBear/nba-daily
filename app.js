@@ -24,7 +24,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('node-compass')({mode: 'expanded'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -39,6 +38,11 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+// load compass only on development
+if (app.get('env') === 'development') {
+    app.use(require('node-compass')({mode: 'expanded'}));
+}
 
 // error handlers
 
