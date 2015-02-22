@@ -19,16 +19,20 @@
 </ul>
 
 <script type="text/x-handlebars" data-template-name="standings">
-  <h4>Eastern</h4>
-  <ol class="eastern">
-    \{{#each eastern}}
+  <div class="eastern">
+    <h4>Eastern</h4>
+    <ol>
+      \{{#each eastern}}
       <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
-    \{{/each}}
-  </ol>
-  <h4>Western</h4>
-  <ol class="western">
-    \{{#each western}}
+      \{{/each}}
+    </ol>
+  </div>
+  <div class="western">
+    <h4>Western</h4>
+    <ol>
+      \{{#each western}}
       <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
-    \{{/each}}
-  </ol>
+      \{{/each}}
+    </ol>
+  </div>
 </script>

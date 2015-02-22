@@ -77,3 +77,83 @@ ul {
 .standings .lose {
   color: #880000;
 }
+
+/* line 67, ../sass/style.scss */
+.video-player {
+  width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  /* line 72, ../sass/style.scss */
+  body {
+    padding: 10px;
+  }
+
+  /* line 75, ../sass/style.scss */
+  h1 {
+    margin-bottom: 0;
+  }
+
+  /* line 78, ../sass/style.scss */
+  .standings {
+    float: none;
+    width: auto;
+    overflow: hidden;
+  }
+  /* line 82, ../sass/style.scss */
+  .standings h2 {
+    font-size: 1rem;
+    text-align: right;
+    text-decoration: underline;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: #00B7FF;
+  }
+  /* line 90, ../sass/style.scss */
+  .standings .content.show {
+    display: block;
+  }
+  /* line 93, ../sass/style.scss */
+  .standings .content {
+    display: none;
+    font-size: 0.7rem;
+  }
+  /* line 96, ../sass/style.scss */
+  .standings .content ol {
+    padding-left: 20px;
+  }
+  /* line 99, ../sass/style.scss */
+  .standings .content .team {
+    width: 85px;
+  }
+  /* line 102, ../sass/style.scss */
+  .standings .content .win, .standings .content .lose {
+    width: 20px;
+  }
+  /* line 106, ../sass/style.scss */
+  .standings .eastern {
+    margin-right: 10px;
+  }
+  /* line 109, ../sass/style.scss */
+  .standings .eastern, .standings .western {
+    float: left;
+    width: 48%;
+  }
+
+  /* line 114, ../sass/style.scss */
+  .videos {
+    display: block;
+  }
+
+  /* line 117, ../sass/style.scss */
+  .video {
+    width: 48%;
+    display: inline-block;
+    margin: 0 2% 20px 0;
+  }
+
+  /* line 122, ../sass/style.scss */
+  .video:nth-child(even) {
+    margin-right: 0;
+  }
+}
