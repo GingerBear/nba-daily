@@ -4,6 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
 var _ = require('lodash');
+var utils = require('../lib/utils');
 
 
 /* GET recent single game highlight. */
@@ -16,7 +17,8 @@ router.get('/', function(req, res, next) {
   async.parallel([
     getPageData(1, 50),
     getPageData(51, 100),
-    getPageData(101, 150)
+    getPageData(101, 150),
+    getPageData(151, 200)
   ], function(err, results) {
 
     var ret = [];
@@ -24,15 +26,11 @@ router.get('/', function(req, res, next) {
       ret = ret.concat(results[i]);
     }
 
-    ret = ret.filter(function(v) {
-      //return true;
-      for (var i = 0; i < whitelist.length; i++) {
-        if (whitelist[i].test(v.title.toLowerCase())) {
-          return true;
-        }
-      }
-      return false;
-    });
+    ret = _.chain(ret)
+      .filter(utils.whitelister(whitelist))
+      .each(utils.formatDate)
+      .value();
+
     if (req.xhr) {
       res.send(ret);
     } else {
