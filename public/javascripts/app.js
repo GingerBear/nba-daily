@@ -7,21 +7,11 @@
     $('.standings .content').html(html);
   }
 
-  function initStandingToggler() {
-    $('.standings h2').click(function() {
-      $('.standings .content').toggleClass('show');
-    });
-  }
 
-  if ($(window).width() <= 500) {
-    initStandingToggler();
-  }
-
-  $(window).resize(function() {
+  $('.standings h2').click(function() {
     if ($(window).width() <= 500) {
-      initStandingToggler();
+      $('.standings .content').toggleClass('show');
     }
   });
-
 
 })();
