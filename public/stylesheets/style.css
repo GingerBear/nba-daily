@@ -7,100 +7,117 @@ body {
 /* line 8, ../sass/style.scss */
 a {
   color: #666;
+  text-decoration: none;
 }
 
-/* line 12, ../sass/style.scss */
+/* line 13, ../sass/style.scss */
 nav {
   float: right;
 }
-/* line 14, ../sass/style.scss */
+/* line 15, ../sass/style.scss */
 nav a {
   color: #00B7FF;
 }
+/* line 17, ../sass/style.scss */
+nav a:after {
+  content: '|';
+  color: #aaa;
+  margin-left: 5px;
+}
+/* line 22, ../sass/style.scss */
+nav a:last-child:after {
+  content: '';
+}
 
-/* line 19, ../sass/style.scss */
+/* line 28, ../sass/style.scss */
 ul {
   list-style: none;
   padding-left: 0;
 }
 
-/* line 24, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 .videos {
   display: flex;
   flex-flow: row wrap;
 }
 
-/* line 29, ../sass/style.scss */
+/* line 38, ../sass/style.scss */
 .video {
   width: 200px;
   height: auto;
   margin: 0 20px 30px 0;
 }
-/* line 33, ../sass/style.scss */
+/* line 42, ../sass/style.scss */
 .video img {
   width: 100%;
 }
-/* line 36, ../sass/style.scss */
-.video label {
+/* line 45, ../sass/style.scss */
+.video .title {
   font-size: 0.8rem;
   color: #666;
+  display: block;
+}
+/* line 50, ../sass/style.scss */
+.video .date {
+  color: #aaa;
+  font-size: 0.7rem;
 }
 
-/* line 42, ../sass/style.scss */
+/* line 56, ../sass/style.scss */
 .standings {
   float: right;
   width: 220px;
 }
-/* line 45, ../sass/style.scss */
+/* line 59, ../sass/style.scss */
 .standings h2 {
   margin-top: 0;
 }
-/* line 48, ../sass/style.scss */
+/* line 62, ../sass/style.scss */
 .standings ol li:nth-of-type(8) {
   margin-bottom: 10px;
 }
-/* line 51, ../sass/style.scss */
+/* line 65, ../sass/style.scss */
 .standings .team {
   width: 120px;
   display: inline-block;
 }
-/* line 55, ../sass/style.scss */
+/* line 69, ../sass/style.scss */
 .standings .win, .standings .lose {
   width: 30px;
   display: inline-block;
 }
-/* line 59, ../sass/style.scss */
+/* line 73, ../sass/style.scss */
 .standings .win {
   color: #006600;
 }
-/* line 62, ../sass/style.scss */
+/* line 76, ../sass/style.scss */
 .standings .lose {
   color: #880000;
 }
 
-/* line 67, ../sass/style.scss */
+/* line 81, ../sass/style.scss */
 .video-player {
   width: 100%;
 }
 
 @media only screen and (max-width: 500px) {
-  /* line 72, ../sass/style.scss */
+  /* line 86, ../sass/style.scss */
   body {
     padding: 10px;
   }
 
-  /* line 75, ../sass/style.scss */
+  /* line 89, ../sass/style.scss */
   h1 {
     margin-bottom: 0;
   }
 
-  /* line 78, ../sass/style.scss */
+  /* line 92, ../sass/style.scss */
   .standings {
     float: none;
     width: auto;
     overflow: hidden;
   }
-  /* line 82, ../sass/style.scss */
+  /* line 96, ../sass/style.scss */
   .standings h2 {
     font-size: 1rem;
     text-align: right;
@@ -109,50 +126,50 @@ ul {
     cursor: pointer;
     color: #00B7FF;
   }
-  /* line 90, ../sass/style.scss */
+  /* line 104, ../sass/style.scss */
   .standings .content.show {
     display: block;
   }
-  /* line 93, ../sass/style.scss */
+  /* line 107, ../sass/style.scss */
   .standings .content {
     display: none;
     font-size: 0.7rem;
   }
-  /* line 96, ../sass/style.scss */
+  /* line 110, ../sass/style.scss */
   .standings .content ol {
     padding-left: 20px;
   }
-  /* line 99, ../sass/style.scss */
+  /* line 113, ../sass/style.scss */
   .standings .content .team {
     width: 85px;
   }
-  /* line 102, ../sass/style.scss */
+  /* line 116, ../sass/style.scss */
   .standings .content .win, .standings .content .lose {
     width: 20px;
   }
-  /* line 106, ../sass/style.scss */
+  /* line 120, ../sass/style.scss */
   .standings .eastern {
     margin-right: 10px;
   }
-  /* line 109, ../sass/style.scss */
+  /* line 123, ../sass/style.scss */
   .standings .eastern, .standings .western {
     float: left;
     width: 48%;
   }
 
-  /* line 114, ../sass/style.scss */
+  /* line 128, ../sass/style.scss */
   .videos {
     display: block;
   }
 
-  /* line 117, ../sass/style.scss */
+  /* line 131, ../sass/style.scss */
   .video {
     width: 48%;
     display: inline-block;
     margin: 0 2% 20px 0;
   }
 
-  /* line 122, ../sass/style.scss */
+  /* line 136, ../sass/style.scss */
   .video:nth-child(even) {
     margin-right: 0;
   }
