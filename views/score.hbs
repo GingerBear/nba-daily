@@ -1,0 +1,17 @@
+<div class="today_score">
+  <h2>Today Score</h2>
+  <div class="content">
+    {{#each scores}}
+      <div>
+        <div>
+          {{#each teams}}
+          <p>
+            <img src="{{logo}}"> {{team}} {{score}} {{#if win}} win {{/if}}
+          </p>
+          {{/each}}
+        </div>
+        <hr>
+      </div>
+    {{/each}}
+  </div>
+</div>
