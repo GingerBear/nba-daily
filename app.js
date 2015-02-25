@@ -10,6 +10,7 @@ var dailyZap = require('./routes/dailyZap');
 var topTen = require('./routes/topTen');
 var video = require('./routes/video');
 var standings = require('./routes/standings');
+var todayScore = require('./routes/today_score');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/daily-zap', dailyZap);
 app.use('/top-10', topTen);
 app.use('/video', video);
 app.use('/standings', standings);
+app.use('/today_score', todayScore);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
