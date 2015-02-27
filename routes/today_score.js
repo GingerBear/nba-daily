@@ -22,9 +22,21 @@ router.get('/', function(req, res, next) {
   })
 });
 
+
+//get the today date to update the request url
+var datetime = new Date();
+
+var month = datetime.getMonth() + 1;
+month = (month < 10 ? '0' : '') + month;
+
+var year = datetime.getFullYear();
+
+var day  = datetime.getDate();
+day = (day < 10 ? '0' : '') + day;
+
 function getPage() {
   return function(callback) {
-    request('http://www.nba.com/gameline/20150224/', function(error, response, body) {
+    request('http://www.nba.com/gameline/' + year + month + day + '/', function(error, response, body) {
       if (error) {
         throw error;
       }
