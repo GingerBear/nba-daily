@@ -137,3 +137,20 @@ ul {
     margin-right: 0;
   }
 }
+
+.today-score {
+  .score-day {
+    float: left;
+  }
+  .team {
+    display: inline-block;
+    width: 130px;
+    margin-bottom: 5px;
+  }
+  .win {
+    font-weight: bold;
+  }
+  .lose {
+    color: #666;
+  }
+}
