@@ -174,3 +174,21 @@ ul {
     margin-right: 0;
   }
 }
+/* line 142, ../sass/style.scss */
+.today-score .score-day {
+  float: left;
+}
+/* line 145, ../sass/style.scss */
+.today-score .team {
+  display: inline-block;
+  width: 130px;
+  margin-bottom: 5px;
+}
+/* line 150, ../sass/style.scss */
+.today-score .win {
+  font-weight: bold;
+}
+/* line 153, ../sass/style.scss */
+.today-score .lose {
+  color: #666;
+}

@@ -3,13 +3,15 @@ var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
-
+var utils = require('../lib/utils');
 
 /* GET today score. */
 router.get('/', function(req, res, next) {
-  async.waterfall([
-    getPage(),
-    parsePage()
+
+  async.parallel([
+    getScore(0),
+    getScore(1),
+    getScore(2)
   ], function(err, result) {
     if (req.xhr) {
       res.send(result);
@@ -22,56 +24,53 @@ router.get('/', function(req, res, next) {
   })
 });
 
+function getScore(last) {
+  //get the today date to update the request url
+  var datetime = new Date();
+  datetime.setDate(datetime.getDate() - last);
+  var month = datetime.getMonth() + 1;
+  var day  = datetime.getDate();
+  var year = datetime.getFullYear();
+  var week = utils.week[datetime.getDay()];
 
-//get the today date to update the request url
-var datetime = new Date();
+  month = (month < 10 ? '0' : '') + month;
+  day = (day < 10 ? '0' : '') + day;
 
-var month = datetime.getMonth() + 1;
-month = (month < 10 ? '0' : '') + month;
-
-var year = datetime.getFullYear();
-
-var day  = datetime.getDate();
-day = (day < 10 ? '0' : '') + day;
-
-function getPage() {
   return function(callback) {
     request('http://www.nba.com/gameline/' + year + month + day + '/', function(error, response, body) {
       if (error) {
         throw error;
       }
-      callback(null, body);
-    })
-  }
-}
 
-function parsePage() {
-  return function(body, callback) {
-    var $ = cheerio.load(body);
-    var $games = $('.Recap');
+      var $ = cheerio.load(body);
+      var $games = $('.Recap');
 
-    var games = $games.map(function() {
-      var $game = $(this);
-      var $teams = $game.find('.nbaModTopTeamAw, .nbaModTopTeamHm');
+      var games = $games.map(function() {
+        var $game = $(this);
+        var $teams = $game.find('.nbaModTopTeamAw, .nbaModTopTeamHm');
 
-      var teams = $teams.map(function() {
-        var $team = $(this);
+        var teams = $teams.map(function() {
+          var $team = $(this);
+          return {
+            team: $team.find('.nbaModTopTeamName').text().toUpperCase(),
+            score: $team.find('.nbaModTopTeamNum').text(),
+            win: $team.find('.winner').text() ? true : false,
+            logo: $team.find('img').attr('src')
+          }
+        }).get();
+
         return {
-          team: $team.find('.nbaModTopTeamName').text(),
-          score: $team.find('.nbaModTopTeamNum').text(),
-          win: $team.find('.winner').text() ? true : false,
-          logo: $team.find('img').attr('src')
+          status: $game.find('.nbaModTopStatus .nbaFnlStatTx').text(),
+          startTime: $game.find('.nbaModTopStatus .nbaFnlStatTxSm').text(),
+          teams: teams
         }
       }).get();
 
-      return {
-        status: $game.find('.nbaModTopStatus .nbaFnlStatTx').text(),
-        startTime: $game.find('.nbaModTopStatus .nbaFnlStatTxSm').text(),
-        teams: teams
-      }
-    }).get();
-
-    callback(null, games);
+      callback(null, {
+        date:  week + ', ' + month + '/' + day + '/' + year,
+        games: games
+      });
+    })
   }
 }
 
