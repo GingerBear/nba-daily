@@ -26,8 +26,12 @@ describe('nba-daily', function() {
         page.evaluate(function () {
           return document.querySelector('h1').innerText;
         }, function(result) {
-          result.should.equal('Game Highlights');
-          done();
+          try {
+            result.should.equal('Game Highlights');
+            done();
+          } catch(e) {
+            done(e);
+          }
         });
       });
     });
@@ -39,8 +43,12 @@ describe('nba-daily', function() {
         page.evaluate(function () {
           return document.querySelectorAll('.video').length;
         }, function(result) {
-          result.should.above(1);
-          done();
+          try {
+            result.should.above(100);
+            done();
+          } catch(e) {
+            done(e);
+          }
         });
       });
     });
@@ -52,8 +60,12 @@ describe('nba-daily', function() {
         page.evaluate(function () {
           return document.querySelectorAll('.standings .team').length;
         }, function(result) {
-          result.should.to.equal(30);
-          done();
+          try {
+            result.should.to.equal(30);
+            done();
+          } catch(e) {
+            done(e);
+          }
         });
       }, 2000);
     });
