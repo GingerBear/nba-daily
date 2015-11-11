@@ -32,8 +32,10 @@ router.get('/', function(req, res, next) {
 function getPage(start, number) {
   start = start || 1;
   number = number || 44;
+  var url = 'http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start='+start+'&npp='+number+'&sub_category=Daily%20Zap&section=channels/top_plays&season=1415&sort=recent&site=nba&hide=true&csiID=csi2'
+  console.log(url)
   return function(callback) {
-    request('http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start='+start+'&npp='+number+'&sub_category=Daily%20Zap&section=channels/top_plays&season=1415&sort=recent&site=nba&hide=true&csiID=csi2', function(error, response, body) {
+    request(url, function(error, response, body) {
       if (error) {
         throw error;
       }

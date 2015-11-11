@@ -43,18 +43,18 @@ function getScore(last) {
       }
 
       var $ = cheerio.load(body);
-      var $games = $('.Recap');
+      var $games = $('.GameLine');
 
       var games = $games.map(function() {
         var $game = $(this);
-        var $teams = $game.find('.nbaModTopTeamAw, .nbaModTopTeamHm');
+        var $teams = $game.find('.nbaModTopInfo').find('.nbaModTopTeamAw, .nbaModTopTeamHm');
 
         var teams = $teams.map(function() {
           var $team = $(this);
           return {
             team: $team.find('.nbaModTopTeamName').text().toUpperCase(),
             score: $team.find('.nbaModTopTeamNum').text(),
-            win: $team.find('.winner').text() ? true : false,
+            win: !!$team.find('.win').length,
             logo: $team.find('img').attr('src')
           }
         }).get();
