@@ -11,7 +11,7 @@ var utils = require('../lib/utils');
 router.get('/', function(req, res, next) {
 
   var whitelist = [
-    /vs\./,
+    /(lakers).*vs|vs\..*(lakers)/
   ];
 
   async.parallel([

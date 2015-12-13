@@ -11,6 +11,8 @@ var topTen = require('./routes/topTen');
 var video = require('./routes/video');
 var standings = require('./routes/standings');
 var todayScore = require('./routes/today_score');
+var lives = require('./routes/lives');
+var live = require('./routes/live');
 
 var app = express();
 
@@ -33,6 +35,8 @@ app.use('/top-10', topTen);
 app.use('/video', video);
 app.use('/standings', standings);
 app.use('/today_score', todayScore);
+app.use('/lives', lives);
+app.use('/live', live);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
