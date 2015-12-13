@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var nib          = require('nib');
+var hbs  = require('express-hbs');
 
 var routes = require('./routes/index');
 var dailyZap = require('./routes/dailyZap');
@@ -17,9 +19,14 @@ var live = require('./routes/live');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view options', {layout: 'layout'});
+app.engine('hbs', hbs.express4({
+    partialsDir:    __dirname + '/views/partials',
+    defaultLayout:  __dirname + '/views/layouts/default.hbs',
+    layoutsDir:     __dirname + '/views/layouts'
+}));
 app.set('view engine', 'hbs');
+app.set('views', 'views');
+app.hbs = hbs;
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -28,6 +35,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.use(require("connect-assets")({
+    paths: [
+        __dirname + '/assets/js',
+        __dirname + '/assets/css'
+    ],
+    buildDir: '.built'
+}, function (assetsInstance) {
+    assetsInstance.environment.getEngines('.styl').configure(function (stylus) {
+        stylus.use(nib()).import('nib');
+        if (app.settings.env === 'development') {
+            stylus.set('sourcemap', {inline: true});
+        }
+    });
+}));
+
+require('./lib/hbs-helpers')(app);
+
 
 app.use('/', routes);
 app.use('/daily-zap', dailyZap);
@@ -44,11 +71,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-// load compass only on development
-if (app.get('env') === 'development') {
-    app.use(require('node-compass')({mode: 'expanded'}));
-}
 
 // error handlers
 

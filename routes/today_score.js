@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
       res.send(result);
     } else {
       res.render('score', {
+        nav: 'score',
         title: 'Today Score',
         scores: result
       });

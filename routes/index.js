@@ -18,25 +18,34 @@ router.get('/', function(req, res, next) {
     getPageData(1, 50),
     getPageData(51, 100),
     getPageData(101, 150),
-    //getPageData(151, 200)
+    getPageData(151, 200),
+    getPageData(201, 250)
   ], function(err, results) {
+    var videos = [];
+    var dateGroup = {};
 
-    var ret = [];
     for(var i = 0; i < results.length; i++) {
-      ret = ret.concat(results[i]);
+      videos = videos.concat(results[i]);
     }
 
-    ret = _.chain(ret)
+    _.chain(videos)
       .filter(utils.whitelister(whitelist))
       .each(utils.formatDate)
-      .value();
+      .each(function(v) {
+        if (dateGroup[v.date]) {
+          dateGroup[v.date].push(v);
+        } else {
+          dateGroup[v.date] = [v];
+        }
+      }).value();
 
     if (req.xhr) {
-      res.send(ret);
+      res.send(dateGroup);
     } else {
-      res.render('videos', {
+      res.render('videos-by-date', {
+        nav: 'highlights',
         title: 'Game Highlights',
-        videos: ret
+        videos: dateGroup
       });
     }
   });
@@ -58,7 +67,7 @@ function getPageData(start, number) {
       } catch(e) {}
 
       callback(null, json.results[0]);
-    })
+    });
   }
 }
 

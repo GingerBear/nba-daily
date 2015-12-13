@@ -31,5 +31,6 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# sass cache
+# cache
 public/.sass-cache/
+.build/

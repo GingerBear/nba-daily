@@ -1,39 +1,15 @@
 <h1>{{title}}</h1>
 
-<div class="standings">
-  <h2>Standings</h2>
-  <div class="content">
-    Loading...
-  </div>
-</div>
-
 <ul class="videos">
   {{#each videos}}
     <li class="video">
       <a href="{{url}}" title="{{title}}" data-preload="true">
         <img src="{{metadata.media.600x336.uri}}" alt="{{alt}}"/>
+      </a>
+      <div class="info">
         <label class="title">{{title}}</label>
         <span class="date">{{date}}</span>
-      </a>
+      </div>
     </li>
   {{/each}}
 </ul>
-
-<script type="text/x-handlebars" data-template-name="standings">
-  <div class="eastern">
-    <h4>Eastern</h4>
-    <ol>
-      \{{#each eastern}}
-      <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
-      \{{/each}}
-    </ol>
-  </div>
-  <div class="western">
-    <h4>Western</h4>
-    <ol>
-      \{{#each western}}
-      <li><span class="team">\{{team}}</span><span class="win">\{{win}}</span><span class="lose">\{{lose}}</span></li>
-      \{{/each}}
-    </ol>
-  </div>
-</script>
