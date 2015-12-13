@@ -1,8 +1,10 @@
-@import "compass/css3";
-
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -11,17 +13,17 @@ a {
 }
 
 nav {
-  float: right;
+  width: 100%;
+  float: left;
+  background: white;
+  border-bottom: 1px solid #eee;
   a {
     color: #00B7FF;
-    &:after {
-      content: '|';
-      color: #aaa;
-      margin-left: 5px;
-    }
-    &:last-child:after {
-      content: '';
-    }
+    padding: 10px;
+    display: inline-block;
+  }
+  [href="/standings"] {
+    display: none;
   }
 }
 
@@ -33,6 +35,7 @@ ul {
 .videos {
   display: flex;
   flex-flow: row wrap;
+  padding-right: 25%;
 }
 
 .video {
@@ -54,8 +57,14 @@ ul {
 }
 
 .standings {
-  float: right;
-  width: 220px;
+  float: none;
+  overflow: hidden;
+  background: #fff;
+  width: 25%;
+  position: absolute;
+  right: 25px;
+  top: 35px;
+
   h2 {
     margin-top: 0;
   }
@@ -81,18 +90,75 @@ ul {
 .video-player {
   width: 100%;
 }
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+activeNav() {
+  background: #eee;
+  color: #555;
+}
 
 @media only screen and (max-width: 500px) {
   body {
-    padding: 10px;
+    margin: 0;
+    padding: 0;
+    padding-top: 35px;
   }
   h1 {
-    margin-bottom: 0;
+    display: none;
+  }
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: white;
+    border-bottom: 1px solid #eee;
+    &.highlights {
+      .highlights {
+        activeNav();
+      }
+    }
+    &.top-10 {
+      .top-10 {
+        activeNav();
+      }
+    }
+    &.score {
+      .score {
+        activeNav();
+      }
+    }
+    a {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-right: 1px solid #eee;
+      color: #999;
+      &:after {
+        display: none;
+      }
+      &:last-of-type {
+        border-right: none;
+      }
+    }
+    [href="/standings"] {
+      display: block;
+    }
+  }
+  .date-header {
+    padding: 0 10px;
   }
   .standings {
     float: none;
-    width: auto;
     overflow: hidden;
+    width: 100%;
+    background: #fff;
+    position: static;
+
     h2 {
       font-size: 1rem;
       text-align: right;
@@ -101,12 +167,16 @@ ul {
       cursor: pointer;
       color: #00B7FF;
     }
+    h4 {
+      margin: 5px 0;
+    }
     .content.show {
       display: block;
     }
     .content {
       display: none;
       font-size: 0.7rem;
+      padding: 10px;
       ol {
         padding-left: 20px;
       }
@@ -127,11 +197,35 @@ ul {
   }
   .videos {
     display: block;
+    padding-right: 0;
   }
   .video {
-    width: 48%;
-    display: inline-block;
-    margin: 0 2% 20px 0;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    img {
+      float: left;
+    }
+    a {
+      display: block;
+    }
+    .title {
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+    }
+    .date {
+      font-size: 13px;
+      color: white;
+    }
+    .info {
+      position: absolute;
+      background: rgba(0,0,0,0.3);
+      bottom: 0;
+      left: 0;
+      padding: 5px;
+    }
   }
   .video:nth-child(even) {
     margin-right: 0;

@@ -33,7 +33,8 @@ router.get('/', function(req, res, next) {
     if (req.xhr) {
       res.send(ret);
     } else {
-      res.render('index', {
+      res.render('videos', {
+        nav: 'top-10',
         title: 'Top 10',
         videos: ret
       });
