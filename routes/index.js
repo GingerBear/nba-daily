@@ -11,14 +11,14 @@ var utils = require('../lib/utils');
 router.get('/', function(req, res, next) {
 
   var whitelist = [
-    /(lakers).*vs|vs\..*(lakers)/
+    /vs\./i
   ];
 
   async.parallel([
     getPageData(1, 50),
     getPageData(51, 100),
     getPageData(101, 150),
-    getPageData(151, 200)
+    //getPageData(151, 200)
   ], function(err, results) {
 
     var ret = [];
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
     if (req.xhr) {
       res.send(ret);
     } else {
-      res.render('index', {
+      res.render('videos', {
         title: 'Game Highlights',
         videos: ret
       });
