@@ -9,17 +9,15 @@ var playersList = require('../lib/players');
 
 
 router.get('/', function(req, res, next) {
-  var data = {
+  if (req.isJson) {
+    return res.send(playersList);
+  }
+
+  res.render('player-list', {
     nav: 'players',
     title: 'All players',
     players: playersList
-  };
-
-  if (req.isJson) {
-    return res.send(data);
-  }
-
-  res.render('player-list', data);
+  });
 });
 
 router.get('/:playerName', function(req, res, next) {
@@ -33,23 +31,31 @@ router.get('/:playerName', function(req, res, next) {
       return next(err);
     }
 
-    var ret = [];
+    var videos = [];
+    var dateGroup = {};
+
     for(var i = 0; i < results.length; i++) {
-      ret = ret.concat(results[i]);
+      videos = videos.concat(results[i]);
     }
 
-    ret = _.chain(ret)
+    videos = _.chain(videos)
       .each(helpers.formatDate)
-      .value();
+      .each(function(v) {
+        if (dateGroup[v.date]) {
+          dateGroup[v.date].push(v);
+        } else {
+          dateGroup[v.date] = [v];
+        }
+      }).value();
 
     if (req.isJson) {
-      res.send(ret);
+      res.send(dateGroup);
     } else {
       res.render('videos', {
         nav: 'players',
         title: 'Player: ' + playerName,
         playerName: playerName,
-        videos: ret
+        videos: dateGroup
       });
     }
   });

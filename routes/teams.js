@@ -9,17 +9,14 @@ var teamsMap = require('../lib/teams');
 
 
 router.get('/', function(req, res, next) {
-  var data = {
-    nav: 'teams',
-    title: 'All Teams',
-    teams: teamsMap
-  };
-
-
   if (req.isJson) {
-    res.send(data);
+    res.send(teamsMap);
   } else {
-    res.render('team-list', data);
+    res.render('team-list', {
+      nav: 'teams',
+      title: 'All Teams',
+      teams: teamsMap
+    });
   }
 });
 
@@ -40,23 +37,31 @@ router.get('/:teamKey', function(req, res, next) {
       return next(err);
     }
 
-    var ret = [];
+    var videos = [];
+    var dateGroup = {};
+
     for(var i = 0; i < results.length; i++) {
-      ret = ret.concat(results[i]);
+      videos = videos.concat(results[i]);
     }
 
-    ret = _.chain(ret)
+    videos = _.chain(videos)
       .each(helpers.formatDate)
-      .value();
+      .each(function(v) {
+        if (dateGroup[v.date]) {
+          dateGroup[v.date].push(v);
+        } else {
+          dateGroup[v.date] = [v];
+        }
+      }).value();
 
     if (req.isJson) {
-      res.send(ret);
+      res.send(dateGroup);
     } else {
       res.render('videos', {
         nav: 'teams',
         title: 'Team: ' + teamName.name,
         team: teamName,
-        videos: ret
+        videos: dateGroup
       });
     }
   });
