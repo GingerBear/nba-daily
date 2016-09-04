@@ -15,7 +15,7 @@ router.get('*', function(req, res, next) {
     getPage(path),
     parsePage()
   ], function(err, result) {
-    if (req.xhr) {
+    if (req.isJson) {
       res.send(result);
     } else {
       res.render('video', result)

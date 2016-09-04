@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<div class="player-list">
+  <ul>
+  {{#each players}}
+    {{#if this.[3]}}
+    <li><a href="/players/{{this.[2]}}"><span>{{this.[1]}} ({{this.[10]}})</span></a></li>
+    {{/if}}
+  {{/each}}
+  </ul>
+</div>

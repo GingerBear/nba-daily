@@ -44,6 +44,11 @@ ul {
   margin: 0 20px 30px 0;
   img {
     width: 100%;
+    display: block;
+  }
+  a {
+    position: relative;
+    display: block;
   }
   .title {
     font-size: 0.8rem;
@@ -53,6 +58,14 @@ ul {
   .date {
     color: #aaa;
     font-size: 0.7rem;
+  }
+  .video-length {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.36);
+    color: white;
+    padding: 0 3px;
   }
 }
 
@@ -88,8 +101,9 @@ ul {
 }
 
 .video-player {
-  width: calc(100% - 300px);
+  width: 100%;
 }
+
 .header {
   width: 100%;
   position: fixed;
@@ -102,21 +116,69 @@ activeNav() {
   color: #555;
 }
 
+
+.team-list {
+  padding-right: 25%;
+  li {
+    display: inline-block;
+  }
+  a {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+}
+
+.player-list {
+  padding-right: 25%;
+  li {
+    display: inline-block;
+  }
+  a {
+    width: 230px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding: 0 10px;
+    li {
+      display: block;
+    }
+    a {
+      width: 100%;
+    }
+  }
+}
+
 @media only screen and (max-width: 500px) {
   body {
     margin: 0;
     padding: 0;
-    padding-top: 35px;
+    position: relative;
   }
   h1 {
     display: none;
+  }
+  .header {
+    bottom: 0;
+    top: auto;
   }
   nav {
     width: 100%;
     display: flex;
     justify-content: center;
     background: white;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
     &.highlights {
       .highlights {
         activeNav();
@@ -132,9 +194,24 @@ activeNav() {
         activeNav();
       }
     }
+    &.teams {
+      .teams {
+        activeNav();
+      }
+    }
+    &.players {
+      .players {
+        activeNav();
+      }
+    }
+    &.nav-standings {
+      .nav-standings {
+        activeNav();
+      }
+    }
     a {
       flex: 1;
-      padding: 10px;
+      padding: 15px 10px;
       text-align: center;
       border-right: 1px solid #eee;
       color: #999;
@@ -156,12 +233,19 @@ activeNav() {
     padding: 0 10px;
   }
   .standings {
+    display: none;
+  }
+  .standings-page {
+    display: block;
     float: none;
     overflow: hidden;
     width: 100%;
     background: #fff;
     position: static;
-
+    li {
+      border-bottom: 1px solid #eee;
+      padding: 3px 0;
+    }
     h2 {
       font-size: 1rem;
       text-align: right;
@@ -177,39 +261,29 @@ activeNav() {
       display: block;
     }
     .content {
-      display: none;
-      font-size: 0.7rem;
       padding: 10px;
+      font-size: 0.8rem;
       ol {
         padding-left: 20px;
       }
       .team {
-        width: 85px;
+        width: calc(100% - 50px);
       }
       .win, .lose {
         width: 20px;
       }
     }
-    .eastern {
-      margin-right: 10px;
-    }
-    .eastern, .western {
-      float: left;
-      width: 48%;
-    }
   }
   .videos {
     display: block;
     padding-right: 0;
+    margin: 0;
   }
   .video {
     width: 100%;
     margin: 0;
     overflow: hidden;
     position: relative;
-    img {
-      float: left;
-    }
     a {
       display: block;
     }
@@ -230,24 +304,47 @@ activeNav() {
       padding: 5px;
     }
   }
+
+  .video-page {
+    .back {
+      display: block;
+      background: #eee;
+    }
+  }
+
   .video:nth-child(even) {
     margin-right: 0;
   }
-}
 
-.today-score {
-  .score-day {
-    float: left;
+  .team-list {
+    padding: 0 10px;
+    li {
+      display: block;
+    }
+    a {
+      width: 100%;
+    }
   }
-  .team {
-    display: inline-block;
-    width: 130px;
-    margin-bottom: 5px;
+
+  .player-list {
+    padding: 0 10px;
+    li {
+      display: block;
+    }
+    a {
+      width: 100%;
+      padding: 15px 10px;
+    }
   }
-  .win {
-    font-weight: bold;
-  }
-  .lose {
-    color: #666;
+
+  .video-page {
+    h1, p {
+      padding: 10px;
+    }
+    .back {
+      display: block;
+      background: #eee;
+      padding: 10px;
+    }
   }
 }

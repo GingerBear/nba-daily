@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
 var _ = require('lodash');
-var utils = require('../lib/utils');
+var helpers = require('../lib/helpers');
 
 
 /* GET recent single game highlight. */
@@ -21,6 +21,10 @@ router.get('/', function(req, res, next) {
     getPageData(151, 200),
     getPageData(201, 250)
   ], function(err, results) {
+    if (err) {
+      return next(err);
+    }
+
     var videos = [];
     var dateGroup = {};
 
@@ -29,8 +33,8 @@ router.get('/', function(req, res, next) {
     }
 
     _.chain(videos)
-      .filter(utils.whitelister(whitelist))
-      .each(utils.formatDate)
+      .filter(helpers.whitelister(whitelist))
+      .each(helpers.formatDate)
       .each(function(v) {
         if (dateGroup[v.date]) {
           dateGroup[v.date].push(v);
@@ -57,16 +61,11 @@ function getPageData(start, number) {
   return function(callback) {
     request('http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start='+start+'&npp='+number+'&event=playoffs&season=1516&sort=recent&site=nba&hide=true&csiID=csi5', function(error, response, body) {
       if (error) {
-        throw error;
+        return callback(error);
       }
-      var $ = cheerio.load(body);
-      var json = $('#jsCode').text();
 
-      try {
-        json = JSON.parse(json.replace(/(\\')/g, '\''));
-      } catch(e) {}
-
-      callback(null, json.results[0]);
+      var data = helpers.parseJsCode(body);
+      return callback(null, data);
     });
   }
 }
