@@ -20,23 +20,31 @@ router.get('/', function(req, res, next) {
     getPageData(51, 100)
   ], function(err, results) {
 
-    var ret = [];
+    var videos = [];
+    var dateGroup = {};
+
     for(var i = 0; i < results.length; i++) {
-      ret = ret.concat(results[i]);
+      videos = videos.concat(results[i]);
     }
 
-    ret = _.chain(ret)
+    videos = _.chain(videos)
       .filter(helpers.whitelister(whitelist))
       .each(helpers.formatDate)
-      .value();
+      .each(function(v) {
+        if (dateGroup[v.date]) {
+          dateGroup[v.date].push(v);
+        } else {
+          dateGroup[v.date] = [v];
+        }
+      }).value();
 
     if (req.isJson) {
-      res.send(ret);
+      res.send(dateGroup);
     } else {
       res.render('videos', {
         nav: 'top-10',
         title: 'Top 10',
-        videos: ret
+        videos: dateGroup
       });
     }
   });
