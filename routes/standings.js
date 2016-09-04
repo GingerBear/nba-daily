@@ -8,11 +8,16 @@ var async = require('async');
 /* GET recent standing by conference. */
 router.get('/', function(req, res, next) {
   async.waterfall([
-    getPage(1, 50),
+    getPage(),
     parsePage()
   ], function(err, result) {
-    res.send(result);
-  })
+    if (req.isJson) {
+      res.send(result);
+    } else {
+      result.nav = 'nav-standings';
+      res.render('standings', result);
+    }
+  });
 });
 
 function getPage() {

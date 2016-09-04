@@ -7,15 +7,6 @@ var bodyParser = require('body-parser');
 var nib          = require('nib');
 var hbs  = require('express-hbs');
 
-var routes = require('./routes/index');
-var dailyZap = require('./routes/dailyZap');
-var topTen = require('./routes/topTen');
-var video = require('./routes/video');
-var standings = require('./routes/standings');
-var todayScore = require('./routes/today_score');
-var lives = require('./routes/lives');
-var live = require('./routes/live');
-
 var app = express();
 
 // view engine setup
@@ -36,8 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.use(require("connect-assets")({
     paths: [
         __dirname + '/assets/js',
@@ -55,15 +44,24 @@ app.use(require("connect-assets")({
 
 require('./lib/hbs-helpers')(app);
 
+app.use(function(req, res, next) {
+    if(/\.json$/.test(req.path)) {
+        req.isJson = true;
+        req.path = req.path.replace('.json', '');
+        req.url = req.url.replace('.json', '');
+    }
+    if (req.xhr) {
+        req.isJson = true;
+    }
+    return next();
+});
 
-app.use('/', routes);
-app.use('/daily-zap', dailyZap);
-app.use('/top-10', topTen);
-app.use('/video', video);
-app.use('/standings', standings);
-app.use('/today_score', todayScore);
-app.use('/lives', lives);
-app.use('/live', live);
+app.use('/', require('./routes/index'));
+app.use('/top-10', require('./routes/topTen'));
+app.use('/teams', require('./routes/teams'));
+app.use('/players', require('./routes/players'));
+app.use('/video', require('./routes/video'));
+app.use('/standings', require('./routes/standings'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
