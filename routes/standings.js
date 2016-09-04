@@ -8,7 +8,7 @@ var async = require('async');
 /* GET recent standing by conference. */
 router.get('/', function(req, res, next) {
   async.waterfall([
-    getPage(1, 50),
+    getPage(),
     parsePage()
   ], function(err, result) {
     res.send(result);

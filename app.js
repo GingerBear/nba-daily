@@ -8,13 +8,9 @@ var nib          = require('nib');
 var hbs  = require('express-hbs');
 
 var routes = require('./routes/index');
-var dailyZap = require('./routes/dailyZap');
 var topTen = require('./routes/topTen');
 var video = require('./routes/video');
 var standings = require('./routes/standings');
-var todayScore = require('./routes/today_score');
-var lives = require('./routes/lives');
-var live = require('./routes/live');
 
 var app = express();
 
@@ -36,8 +32,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.use(require("connect-assets")({
     paths: [
         __dirname + '/assets/js',
@@ -57,13 +51,9 @@ require('./lib/hbs-helpers')(app);
 
 
 app.use('/', routes);
-app.use('/daily-zap', dailyZap);
 app.use('/top-10', topTen);
 app.use('/video', video);
 app.use('/standings', standings);
-app.use('/today_score', todayScore);
-app.use('/lives', lives);
-app.use('/live', live);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
