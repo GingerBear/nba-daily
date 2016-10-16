@@ -37,7 +37,7 @@ function getPage(path) {
 function parsePage() {
   return function(body, callback) {
     var $ = cheerio.load(body);
-    var $video = $('#nbaVideoPlayer');
+    var $video = $('#main');
     var json = {
       video: $video.find('[itemprop="contentUrl"]').attr('content'),
       page: $video.find('[itemprop="embedUrl"]').attr('content'),

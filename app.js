@@ -49,6 +49,7 @@ app.use(function(req, res, next) {
         req.isJson = true;
         req.path = req.path.replace('.json', '');
         req.url = req.url.replace('.json', '');
+        req.originalUrl = req.originalUrl.replace('.json', '')
     }
     if (req.xhr) {
         req.isJson = true;

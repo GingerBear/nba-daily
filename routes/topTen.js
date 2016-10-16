@@ -5,6 +5,7 @@ var cheerio = require('cheerio');
 var async = require('async');
 var _ = require('lodash');
 var helpers = require('../lib/helpers');
+var config = require('../lib/config');
 
 
 /* GET recent top 10. */
@@ -54,7 +55,7 @@ function getPageData(start, number) {
   start = start || 0;
   number = number || 44;
   return function(callback) {
-    request('http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start='+start+'&npp='+number+'&section=channels/top_plays&season=1516&sort=recent&site=nba&hide=true&csiID=csi2', function(error, response, body) {
+    request('http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start='+start+'&npp='+number+'&section=channels/top_plays&season=' + config.season + '&sort=recent&site=nba&hide=true&csiID=csi2', function(error, response, body) {
       if (error) {
         return callback(error);
       }

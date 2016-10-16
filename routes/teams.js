@@ -6,6 +6,7 @@ var async = require('async');
 var _ = require('lodash');
 var helpers = require('../lib/helpers');
 var teamsMap = require('../lib/teams');
+var config = require('../lib/config');
 
 
 router.get('/', function(req, res, next) {
@@ -72,7 +73,7 @@ function getPageData(start, number, teamName) {
   number = number || 44;
 
   return function(callback) {
-    var url = `http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start=${start}&npp=${number}&section=games/*|channels/*&team=${encodeURIComponent(teamName.name)}&season=1516&sort=recent&site=nba,${teamName.name}&hide=true&csiID=csi20`;
+    var url = `http://searchapp2.nba.com/nba-search/query.jsp?type=advvideo&start=${start}&npp=${number}&section=games/*|channels/*&team=${encodeURIComponent(teamName.name)}&season=${config.season}&sort=recent&site=nba,${teamName.name}&hide=true&csiID=csi20`;
     request(url, function(error, response, body) {
       if (error) {
         return callback(error);
