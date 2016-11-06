@@ -1,6 +1,5 @@
 var getJson = require('../lib/get-json');
-var cheerio = require('cheerio');
-var request = require('request');
+var getVideoLink = require('./get-video-link');
 var _ = require('lodash');
 
 module.exports = function(gameId) {
@@ -24,20 +23,6 @@ module.exports = function(gameId) {
       gameId: gameId,
       recapLink: link
     }));
-  });
-}
-
-function getVideoLink(videoUrl) {
-  var url = `http://www.nba.com/${videoUrl}`;
-  return new Promise((resolve, reject) => {
-    return request(url, (err, response, body) => {
-      if (err) return reject(err);
-
-      var $ = cheerio.load(body);
-      var videoLink = $('[itemprop="contentUrl"]').first().attr('content');
-
-      return resolve(videoLink);
-    })
   });
 }
 
