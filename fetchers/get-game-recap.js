@@ -7,7 +7,6 @@ module.exports = function(gameId) {
   return getJson(url).then((json) => {
 
     var videoUrl;
-
     try {
       videoUrl = json.response.result.filter(isRecap)[0].url;
     } catch(e) {}
@@ -27,5 +26,5 @@ module.exports = function(gameId) {
 }
 
 function isRecap(video) {
-  return _.find(_(video).get('taxonomy.gameRelated'), { value: 'Recap' });
+  return video && video.videoId && video.videoId.indexOf('recap') > -1;
 }
