@@ -28,7 +28,7 @@ class GameItem extends Component {
             <TeamIcon teamInfo={game.vTeam}></TeamIcon>
           </div>
           <div className="GameRecap">
-            {game.recapLink ? <a className="PlayButton" href={game.recapLink}>&#9658;</a> : null }
+            {game.recapLink ? <a className="PlayButton" href={game.recapLink}><icon className="PlayIcon"></icon></a> : null }
           </div>
         </div>
         { game.nugget.text ? <p> - { game.nugget.text }</p> : null }
