@@ -1,0 +1,12 @@
+footer {
+  margin-bottom: 1000px;
+}
+
+.GoToTop {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  background: #eee;
+  color: #555;
+  text-decoration: none;
+}

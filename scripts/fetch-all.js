@@ -32,13 +32,13 @@ var yesterday = helpers.datetime(new Date()).subtract(1, 'days');
 var tomorrow = helpers.datetime(new Date()).add(1, 'days');
 
 var datesToFetch = [
-  yesterday.format('YYYYMMDD'),
-  today.format('YYYYMMDD'),
-  tomorrow.format('YYYYMMDD')
+  today,
+  yesterday,
+  tomorrow
 ];
 
-var datesGamesToFetch = Promise.all(datesToFetch.map(d => fetchGameWithVideoByDate(d)));
-var datesTop10ToFetch = getTop10ByDates(datesToFetch);
+var datesGamesToFetch = Promise.all(datesToFetch.map(d => fetchGameWithVideoByDate(d.format('YYYYMMDD'))));
+var datesTop10ToFetch = getTop10ByDates(datesToFetch.map(d => d.format('YYYYMMDD')));
 
 Promise.all([
     datesGamesToFetch,
@@ -51,10 +51,13 @@ Promise.all([
 
     gameDates.forEach((d, i) => {
       d.top10Video = top10Dates[i];
-      d.date = datesToFetch[i];
+      d.timestamp = datesToFetch[i].format('x');
     });
 
-    return uploadDropbox(`/data_${today.format('YYYYMMDD')}.json`, JSON.stringify(gameDates));
+    return uploadDropbox(`/nba-data.json`, JSON.stringify({
+      lastUpdate: Date.now(),
+      gameDates: gameDates
+    }));
   })
   .then(response => {
     console.log(response);

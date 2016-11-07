@@ -1,0 +1,21 @@
+header {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0;
+  margin-bottom: 10px;
+}
+
+h1 {
+  flex: 1;
+  text-align: left;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.LastUpdate {
+  font-size: 14px;
+}

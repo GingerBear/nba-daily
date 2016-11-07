@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0;
+}
+
+.PlayButton {
+  color: #999;
+  font-size: 25px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 9px 7px 8px 12px;
+  text-decoration: none;
+}
+
+.PlayButton:active {
+  background-color: #eee;
+}

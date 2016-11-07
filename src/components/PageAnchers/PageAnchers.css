@@ -1,0 +1,18 @@
+.PageAnchers {
+  display: flex;
+  padding: 10px 0;
+}
+
+
+.PageAnchers li a {
+  margin-right: 10px;
+  color: #4078c0;
+  font-size: 15px;
+}
+
+.PageAnchers li span {
+  margin-right: 10px;
+  color: #555;
+  font-weight: bold;
+  font-size: 15px;
+}

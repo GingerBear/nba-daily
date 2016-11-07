@@ -1,0 +1,70 @@
+
+
+.GameItem {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+}
+
+.GameItem .line {
+  display: flex;
+  padding: 10px;
+  margin: 0;
+}
+
+.GameSide {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+
+.GameSide .score {
+  width: 40px;
+  text-align: right;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 16px;
+}
+.GameSide .score.win {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.GameSide:first-of-type {
+  margin-right: 20px;
+}
+
+.GameSide:first-of-type .score {
+  text-align: left;
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.GameItem p {
+  margin: 0;
+  color: #555;
+  font-size: 12px;
+  padding: 5px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ccc;
+}
+
+.GameRecap {
+  display: flex;
+  align-items: center;
+  width: 50px;
+}
+
+
+.GameItem .GameDate {
+  padding: 5px;
+  font-size: 12px;
+  border-bottom: 1px solid #ccc;
+  color: #555;
+}
+
+.GameBadge {
+  color: #55ae2e;
+  padding: 3px;
+  border-radius: 3px;
+}

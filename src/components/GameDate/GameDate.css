@@ -1,0 +1,24 @@
+.GameDate {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.GameDateHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.GameDateHeader h2 {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+.top-10-text {
+  font-size: 20px;
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+}

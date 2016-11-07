@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import './Footer.css'
+
+class Footer extends Component {
+  render() {
+    var style = {
+      paddingBottom: 10,
+      textDecoration: 'none',
+      color: '#555',
+      display: 'block',
+      textAlign: 'right'
+    };
+
+
+    return (
+      <footer>
+        <a href="#header" className="GoToTop">Top</a>
+        <br />
+        <ul>
+          <li><a style={style} href="https://github.com/gingerbear/nba-daily">Github</a></li>
+        </ul>
+      </footer>
+    );
+  }
+}
+
+export default Footer;
