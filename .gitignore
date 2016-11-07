@@ -35,3 +35,5 @@ node_modules
 # cache
 public/.sass-cache/
 .build/
+
+**/.DS_Store

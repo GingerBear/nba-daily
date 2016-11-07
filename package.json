@@ -23,5 +23,6 @@
   },
   "devDependencies": {
     "react-scripts": "0.6.1"
-  }
+  },
+  "homepage": "/nba"
 }
