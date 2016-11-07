@@ -17,13 +17,21 @@ li {
 .PlayButton {
   color: #999;
   font-size: 25px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 9px 7px 8px 12px;
+  border-radius: 25px;
+  padding: 5px 10px;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .PlayButton:active {
   background-color: #eee;
+}
+
+.PlayButtonWithText {
+  width: auto;
+  padding: 5px 13px;
 }
