@@ -1,8 +1,8 @@
-// import {mockData} from './mock-data';
+import {mockData} from './mock-data';
 import moment from 'moment-timezone';
 
 export function getJson(url) {
-  // return Promise.resolve(mockData);
+  return Promise.resolve(mockData);
 
   return fetch(url, {
     method: "GET",

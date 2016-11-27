@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import TeamIcon from '../TeamIcon/TeamIcon.js'
-import {datetime} from '../../lib/utils'
+import TeamIcon from '../TeamIcon/TeamIcon.js';
+import { datetime } from '../../lib/utils';
+import { setState, getState, subscribe } from '../../lib/global-state';
 import './GameItem.css'
 
 class GameItem extends Component {
+  constructor() {
+    super();
+    subscribe(this);
+  }
+
   render() {
+
+    var favTeams = getState().favTeams;
+
     var game = this.props.game;
     var dateTime = datetime(game.startTimeUTC).calendar();
     var isStilPlaying = (game.period.current < 4 && game.period.current > 0) || game.clock !== '' || (game.period.isEndOfPeriod || game.period.isHalftime);
@@ -15,26 +24,40 @@ class GameItem extends Component {
     var vScoreClass = isEnded ? (homeWin ? 'score' : 'score win') : 'score';
 
     var badge = isStilPlaying ? <span className="GameBadge">playing Q{game.period.current}...</span> : null;
+
+    var isFavTeam = containsFavTeams(favTeams, [game.hTeam, game.vTeam]);
+    var GameItemClassName = 'GameItem' + (isFavTeam ? ' isFavTeam' : '');
+
     return (
-      <div className="GameItem">
+      <div className={GameItemClassName}>
         <div className="GameDate"> {dateTime} {badge}</div>
         <div className="line">
+
           <div className="GameSide">
             <TeamIcon teamInfo={game.hTeam}></TeamIcon>
             <span className={hScoreClass}>{game.hTeam.score}</span>
           </div>
+
           <div className="GameSide">
             <span className={vScoreClass}>{game.vTeam.score}</span>
             <TeamIcon teamInfo={game.vTeam}></TeamIcon>
           </div>
+
           <div className="GameRecap">
-            {game.recapLink ? <a className="PlayButton" href={game.recapLink}><icon className="PlayIcon"></icon></a> : null }
+            {game.recapLink ? <a className="PlayButton" href={game.recapLink}><icon className="PlayIcon"></icon></a> : null}
           </div>
+
         </div>
-        { game.nugget.text ? <p> - { game.nugget.text }</p> : null }
+        {game.nugget.text ? <p>{game.nugget.text}</p> : null}
       </div>
     );
   }
+}
+
+function containsFavTeams(favTeams, gameTeams) {
+  var favCodes = favTeams.map(f => f.value);
+  return favCodes.indexOf(gameTeams[0].triCode.toLowerCase()) > -1
+    || favCodes.indexOf(gameTeams[1].triCode.toLowerCase()) > -1;
 }
 
 export default GameItem;

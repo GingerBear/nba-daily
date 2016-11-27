@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import GameList from '../GameList/GameList.js'
 import PageAnchers from '../PageAnchers/PageAnchers.js'
-import {datetime} from '../../lib/utils'
-import './GameDate.css'
+import { datetime } from '../../lib/utils'
+import './GamesDate.css'
 
 class GameDate extends Component {
   render() {
@@ -10,10 +10,10 @@ class GameDate extends Component {
     var dateString = datetime(new Date(+gameDate.timestamp)).calendar().split('at')[0].trim();
 
     return (
-      <div className="GameDate" id={this.props.sectionId}>
-        <div className="GameDateHeader">
+      <div className="GamesDate" id={this.props.sectionId}>
+        <div className="GamesDateHeader">
           <PageAnchers gameDates={this.props.timeStamps} currentSection={dateString}></PageAnchers>
-          {gameDate.top10Video ? <a className="PlayButton PlayButtonWithText" href={gameDate.top10Video}><span className="top-10-text">Top 10</span> <icon className="PlayIcon"></icon></a> : null }
+          {gameDate.top10Video ? <a className="PlayButton PlayButtonWithText" href={gameDate.top10Video}><span className="top-10-text">Top 10</span> <icon className="PlayIcon"></icon></a> : null}
         </div>
 
         <GameList games={gameDate.games}></GameList>

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js'
-import GameDate from '../GameDate/GameDate.js'
-import {getJson} from '../../lib/utils'
+import GamesDate from '../GamesDate/GamesDate.js'
+import { getJson } from '../../lib/utils'
 
 class App extends Component {
   constructor(pros) {
@@ -29,9 +29,8 @@ class App extends Component {
 
     var gameTs = _gameDates.map(d => d.timestamp);
     var gameDates = _gameDates.map((gameDate, i) => (
-      <div key={i}>
-        <GameDate timeStamps={gameTs} gameDate={gameDate} sectionId={`section-${i}`}></GameDate>
-      </div>
+      <GamesDate key={i} timeStamps={gameTs} gameDate={gameDate} sectionId={`section-${i}`}></GamesDate>
+
     ));
     return (
       <div className="App">
