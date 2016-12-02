@@ -4,10 +4,6 @@ import './Footer.css'
 
 class Footer extends Component {
 
-  constructor() {
-    super();
-  }
-
   render() {
     var style = {
       paddingBottom: 10,

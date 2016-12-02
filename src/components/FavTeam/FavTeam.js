@@ -39,10 +39,6 @@ var options = [
 
 class FavTeam extends Component {
 
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     subscribe(this);
   }
@@ -61,7 +57,6 @@ class FavTeam extends Component {
     return (
       <Select
         name="form-field-name"
-        value="one"
         multi={true}
         value={getState().favTeams}
         options={options}

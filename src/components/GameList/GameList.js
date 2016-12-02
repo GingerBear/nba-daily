@@ -7,7 +7,6 @@ class GameList extends Component {
       <li key={i}>
         <GameItem
           game={game}
-          rankings={this.props.rankings}
           />
       </li>);
     return (

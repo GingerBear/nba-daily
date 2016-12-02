@@ -2,6 +2,7 @@ var globalState;
 var subscribers;
 
 init();
+
 function init() {
 
   try {
@@ -9,7 +10,9 @@ function init() {
   } catch (e) { }
 
   globalState = globalState || {
-    favTeams: []
+    favTeams: [],
+    rankings: {},
+    scrollPosition: 0
   };
 
   subscribers = [];
@@ -28,7 +31,6 @@ export function getState() {
 
 export function subscribe(comp) {
   subscribers.push(comp);
-  console.log(subscribers)
 }
 
 export function unsubscribe(comp) {

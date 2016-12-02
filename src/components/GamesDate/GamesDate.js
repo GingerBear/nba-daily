@@ -23,7 +23,6 @@ class GameDate extends Component {
 
         <GameList
           games={gameDate.games}
-          rankings={this.props.rankings}
           />
 
       </div>

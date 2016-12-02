@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TeamIcon from '../TeamIcon/TeamIcon.js';
 import { datetime } from '../../lib/utils';
-import { setState, getState, subscribe } from '../../lib/global-state';
+import { getState, subscribe } from '../../lib/global-state';
 import './GameItem.css'
 
 class GameItem extends Component {
@@ -36,7 +36,6 @@ class GameItem extends Component {
           <div className="GameSide">
             <TeamIcon
               teamInfo={game.hTeam}
-              rankings={this.props.rankings}
               />
             <span className={hScoreClass}>
               {game.hTeam.score}
@@ -49,7 +48,6 @@ class GameItem extends Component {
             </span>
             <TeamIcon
               teamInfo={game.vTeam}
-              rankings={this.props.rankings}
               />
           </div>
 

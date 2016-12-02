@@ -4,6 +4,7 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js'
 import GamesDate from '../GamesDate/GamesDate.js'
 import { getJson } from '../../lib/utils'
+import { setState, getState } from '../../lib/global-state';
 
 class App extends Component {
   constructor(pros) {
@@ -13,12 +14,25 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    window.onbeforeunload = function (e) {
+      setState({
+        scrollPosition: window.scrollY
+      });
+    };
+
     var dataURL = 'https://dl.dropboxusercontent.com/s/i2tqoo6wtt7acjx/nba-data.json';
     return getJson(dataURL)
       .then(data => {
         this.setState({
           data: data
         });
+
+        // set global state
+        setState({
+          rankings: this.state.data.rankings
+        });
+
+        window.scrollTo(0, getState().scrollPosition);
       });
   }
   render() {
@@ -26,7 +40,6 @@ class App extends Component {
       return <p>Loading</p>
     }
     var _gameDates = this.state.data.gameDates;
-    var _rankings = this.state.data.rankings;
 
     var gameTs = _gameDates.map(d => d.timestamp);
     var gameDates = _gameDates.map((gameDate, i) => (
@@ -34,7 +47,6 @@ class App extends Component {
         key={i}
         timeStamps={gameTs}
         gameDate={gameDate}
-        rankings={_rankings}
         sectionId={`section-${i}`}
         />
 
