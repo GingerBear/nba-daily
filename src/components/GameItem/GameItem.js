@@ -34,13 +34,23 @@ class GameItem extends Component {
         <div className="line">
 
           <div className="GameSide">
-            <TeamIcon teamInfo={game.hTeam}></TeamIcon>
-            <span className={hScoreClass}>{game.hTeam.score}</span>
+            <TeamIcon
+              teamInfo={game.hTeam}
+              rankings={this.props.rankings}
+              />
+            <span className={hScoreClass}>
+              {game.hTeam.score}
+            </span>
           </div>
 
           <div className="GameSide">
-            <span className={vScoreClass}>{game.vTeam.score}</span>
-            <TeamIcon teamInfo={game.vTeam}></TeamIcon>
+            <span className={vScoreClass}>
+              {game.vTeam.score}
+            </span>
+            <TeamIcon
+              teamInfo={game.vTeam}
+              rankings={this.props.rankings}
+              />
           </div>
 
           <div className="GameRecap">

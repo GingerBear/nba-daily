@@ -26,10 +26,17 @@ class App extends Component {
       return <p>Loading</p>
     }
     var _gameDates = this.state.data.gameDates;
+    var _rankings = this.state.data.rankings;
 
     var gameTs = _gameDates.map(d => d.timestamp);
     var gameDates = _gameDates.map((gameDate, i) => (
-      <GamesDate key={i} timeStamps={gameTs} gameDate={gameDate} sectionId={`section-${i}`}></GamesDate>
+      <GamesDate
+        key={i}
+        timeStamps={gameTs}
+        gameDate={gameDate}
+        rankings={_rankings}
+        sectionId={`section-${i}`}
+        />
 
     ));
     return (

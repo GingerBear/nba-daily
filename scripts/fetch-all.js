@@ -3,6 +3,7 @@ var helpers = require('../lib/helpers');
 var uploadDropbox = require('../lib/update-dropbox');
 var fetchGameWithVideoByDate = require('../fetchers/get-games-with-recap-by-date.js');
 var getTop10ByDates = require('../fetchers/get-top10-by-dates.js');
+var getRandings = require('../fetchers/get-rankings.js');
 
 http.globalAgent.maxSockets = Infinity;
 
@@ -18,11 +19,13 @@ var datesToFetch = [
 
 var datesGamesToFetch = Promise.all(datesToFetch.map(d => fetchGameWithVideoByDate(d.format('YYYYMMDD'))));
 var datesTop10ToFetch = getTop10ByDates(datesToFetch.map(d => d.format('YYYYMMDD')));
+var rankings = getRandings();
 
 Promise.all([
-    datesGamesToFetch,
-    datesTop10ToFetch
-  ])
+  datesGamesToFetch,
+  datesTop10ToFetch,
+  rankings
+])
   .then(result => {
     console.log(result);
     var gameDates = result[0];
@@ -35,7 +38,8 @@ Promise.all([
 
     return uploadDropbox(`/nba-data.json`, JSON.stringify({
       lastUpdate: Date.now(),
-      gameDates: gameDates
+      gameDates: gameDates,
+      rankings: result[2]
     }));
   })
   .then(response => {
