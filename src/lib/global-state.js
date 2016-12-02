@@ -9,11 +9,11 @@ function init() {
     globalState = JSON.parse(localStorage.getItem('nbaDailyGlobalState'));
   } catch (e) { }
 
-  globalState = globalState || {
+  globalState = Object.assign({
     favTeams: [],
     rankings: {},
     scrollPosition: 0
-  };
+  }, globalState);
 
   subscribers = [];
 }
