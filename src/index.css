@@ -19,12 +19,13 @@ li {
   font-size: 25px;
   width: 40px;
   height: 40px;
-  display: inline-block;
   border: 1px solid #ccc;
   border-radius: 25px;
-  padding: 7px 14px;
   text-decoration: none;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .PlayButton:active {
@@ -41,4 +42,12 @@ li {
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 15px solid #999;
+  box-sizing: border-box;
+  width: 10px;
+  height: 20px;
+  margin-left: 2px;
+}
+
+icon {
+  pointer-events: none;
 }

@@ -14,7 +14,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    window.onbeforeunload = document.pagehide = document.unload = function (e) {
+    window.onbeforeunload = function (e) {
       setState({
         scrollPosition: window.scrollY
       });

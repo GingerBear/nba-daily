@@ -5,9 +5,28 @@ import { getState, subscribe } from '../../lib/global-state';
 import './GameItem.css'
 
 class GameItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     subscribe(this);
+  }
+
+  playVideo = (e) => {
+    e.preventDefault();
+    var videoPlayer = this.refs.video;
+    var isTouchDevice = 'ontouchstart' in document.documentElement;
+
+    if (!isTouchDevice) {
+      window.location.href = videoPlayer.children[0].src;
+      return;
+    }
+
+    videoPlayer.addEventListener('ended', this.onVideoEnded, false);
+    videoPlayer.play();
+  }
+
+  onVideoEnded = (event) => {
+    var videoPlayer = this.refs.video;
+    videoPlayer.webkitExitFullscreen();
   }
 
   render() {
@@ -52,8 +71,16 @@ class GameItem extends Component {
           </div>
 
           <div className="GameRecap">
-            {game.recapLink ? <a className="PlayButton" href={game.recapLink}><icon className="PlayIcon"></icon></a> : null}
+            {game.recapLink ?
+              <a className="PlayButton" onClick={this.playVideo}>
+                <icon className="PlayIcon"></icon>
+              </a>
+              : null}
           </div>
+
+          <video ref="video" style={{ display: 'none' }}>
+            <source src={game.recapLink} type="video/mp4" />
+          </video>
 
         </div>
         {game.nugget.text ? <p>{game.nugget.text}</p> : null}
