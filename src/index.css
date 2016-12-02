@@ -22,7 +22,7 @@ li {
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 25px;
-  padding: 6px 13px;
+  padding: 7px 14px;
   text-decoration: none;
   box-sizing: border-box;
 }
@@ -33,7 +33,7 @@ li {
 
 .PlayButtonWithText {
   width: auto;
-  padding: 5px 13px;
+  padding: 7px 13px;
 }
 
 .PlayIcon {
