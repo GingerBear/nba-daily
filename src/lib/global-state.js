@@ -12,20 +12,21 @@ function init() {
   globalState = Object.assign({
     favTeams: [],
     rankings: {},
-    scrollPosition: 0
+    lastUpdate: null,
+    gameDates: []
   }, globalState);
 
   subscribers = [];
 }
 
 
-export function setState(state = {}) {
+export function setGlobalState(state = {}) {
   Object.assign(globalState, state);
   localStorage.setItem('nbaDailyGlobalState', JSON.stringify(globalState))
   notify();
 }
 
-export function getState() {
+export function getGlobalState() {
   return globalState;
 }
 

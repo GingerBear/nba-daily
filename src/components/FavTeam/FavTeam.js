@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { setState, getState, subscribe, unsubscribe } from '../../lib/global-state';
+import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
 
 var options = [
   { value: 'atl', label: 'Atlanta Hawks' },
@@ -48,7 +48,7 @@ class FavTeam extends Component {
   }
 
   handleChange = (value) => {
-    setState({
+    setGlobalState({
       favTeams: value
     });
   }
@@ -58,7 +58,7 @@ class FavTeam extends Component {
       <Select
         name="form-field-name"
         multi={true}
-        value={getState().favTeams}
+        value={getGlobalState().favTeams}
         options={options}
         onChange={this.handleChange}
         />

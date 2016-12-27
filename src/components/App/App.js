@@ -4,7 +4,7 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js'
 import GamesDate from '../GamesDate/GamesDate.js'
 import { getJson } from '../../lib/utils'
-import { setState, getState } from '../../lib/global-state';
+import { setGlobalState, getGlobalState, subscribe } from '../../lib/global-state';
 
 class App extends Component {
   constructor(pros) {
@@ -14,32 +14,27 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    window.onbeforeunload = function (e) {
-      setState({
-        scrollPosition: window.scrollY
-      });
-    };
-
+    subscribe(this);
     var dataURL = 'https://dl.dropboxusercontent.com/s/i2tqoo6wtt7acjx/nba-data.json';
     return getJson(dataURL)
       .then(data => {
-        this.setState({
-          data: data
-        });
-
         // set global state
-        setState({
-          rankings: this.state.data.rankings
+        setGlobalState({
+          lastUpdate: data.lastUpdate,
+          gameDates: data.gameDates,
+          rankings: data.rankings
         });
-
-        window.scrollTo(0, getState().scrollPosition);
       });
   }
+
   render() {
-    if (!this.state.data) {
+    var cacheData = getGlobalState();
+
+    if (!cacheData.lastUpdate) {
       return <p>Loading</p>
     }
-    var _gameDates = this.state.data.gameDates;
+
+    var _gameDates = cacheData.gameDates;
 
     var gameTs = _gameDates.map(d => d.timestamp);
     var gameDates = _gameDates.map((gameDate, i) => (
@@ -53,7 +48,7 @@ class App extends Component {
     ));
     return (
       <div className="App">
-        <Header lastUpdate={this.state.data.lastUpdate}></Header>
+        <Header lastUpdate={cacheData.lastUpdate}></Header>
         {gameDates}
         <Footer></Footer>
       </div>

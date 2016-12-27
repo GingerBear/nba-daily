@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TeamIcon from '../TeamIcon/TeamIcon.js';
 import { datetime } from '../../lib/utils';
-import { getState, subscribe } from '../../lib/global-state';
+import { getGlobalState, subscribe } from '../../lib/global-state';
 import './GameItem.css'
 
 class GameItem extends Component {
@@ -11,27 +11,26 @@ class GameItem extends Component {
   }
 
   playVideo = (e) => {
-    e.preventDefault();
-    var videoPlayer = this.refs.video;
     var isTouchDevice = 'ontouchstart' in document.documentElement;
-
     if (!isTouchDevice) {
-      window.location.href = videoPlayer.children[0].src;
       return;
     }
 
-    videoPlayer.addEventListener('ended', this.onVideoEnded, false);
-    videoPlayer.play();
+    e.preventDefault();
+
+    this.videoPlayer = document.createElement('video');
+    this.videoPlayer.src = e.target.href;
+    this.videoPlayer.addEventListener('ended', this.onVideoEnded, false);
+    this.videoPlayer.play();
   }
 
   onVideoEnded = (event) => {
-    var videoPlayer = this.refs.video;
-    videoPlayer.webkitExitFullscreen();
+    this.videoPlayer.webkitExitFullscreen();
   }
 
   render() {
 
-    var favTeams = getState().favTeams;
+    var favTeams = getGlobalState().favTeams;
 
     var game = this.props.game;
     var dateTime = datetime(game.startTimeUTC).calendar();
@@ -72,15 +71,11 @@ class GameItem extends Component {
 
           <div className="GameRecap">
             {game.recapLink ?
-              <a className="PlayButton" onClick={this.playVideo}>
+              <a className="PlayButton" onClick={this.playVideo} href={game.recapLink}>
                 <icon className="PlayIcon"></icon>
               </a>
               : null}
           </div>
-
-          <video ref="video" style={{ display: 'none' }}>
-            <source src={game.recapLink} type="video/mp4" />
-          </video>
 
         </div>
         {game.nugget.text ? <p>{game.nugget.text}</p> : null}

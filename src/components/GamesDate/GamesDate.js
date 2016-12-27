@@ -7,22 +7,21 @@ import './GamesDate.css'
 class GameDate extends Component {
 
   playVideo = (e) => {
-    e.preventDefault();
-    var videoPlayer = this.refs.video;
     var isTouchDevice = 'ontouchstart' in document.documentElement;
-
     if (!isTouchDevice) {
-      window.location.href = videoPlayer.children[0].src;
       return;
     }
 
-    videoPlayer.addEventListener('ended', this.onVideoEnded, false);
-    videoPlayer.play();
+    e.preventDefault();
+
+    this.videoPlayer = document.createElement('video');
+    this.videoPlayer.src = e.target.href;
+    this.videoPlayer.addEventListener('ended', this.onVideoEnded, false);
+    this.videoPlayer.play();
   }
 
   onVideoEnded = (event) => {
-    var videoPlayer = this.refs.video;
-    videoPlayer.webkitExitFullscreen();
+    this.videoPlayer.webkitExitFullscreen();
   }
 
   render() {
@@ -34,16 +33,12 @@ class GameDate extends Component {
         <div className="GamesDateHeader">
           <PageAnchers gameDates={this.props.timeStamps} currentSection={dateString} />
           {gameDate.top10Video ?
-            <a className="PlayButton PlayButtonWithText" onClick={this.playVideo}>
+            <a className="PlayButton PlayButtonWithText" onClick={this.playVideo} href={gameDate.top10Video}>
               <span className="top-10-text">Top 10</span>
               <icon className="PlayIcon"></icon>
             </a>
             : null}
         </div>
-
-        <video ref="video" style={{ display: 'none' }}>
-          <source src={gameDate.top10Video} type="video/mp4" />
-        </video>
 
         <GameList
           games={gameDate.games}

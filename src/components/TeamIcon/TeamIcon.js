@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getState } from '../../lib/global-state';
+import { getGlobalState } from '../../lib/global-state';
 import './TeamIcon.css';
 
 class TeamIcon extends Component {
@@ -8,7 +8,7 @@ class TeamIcon extends Component {
     return <span className={`conf-${rk[0]}`}>{rkNum}</span>;
   }
   render() {
-    var rankings = getState().rankings;
+    var rankings = getGlobalState().rankings;
     return (
       <div className='TeamIcon'>
         {this.renderRank(rankings[this.props.teamInfo.triCode])}
