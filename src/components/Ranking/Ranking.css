@@ -1,0 +1,43 @@
+.Ranking {
+  overflow: hidden;
+  margin-bottom: 30px;
+  padding-top: 10px;
+}
+
+.Ranking .Ranking-body ul {
+  float: left;
+  width: 50%;
+}
+
+.Ranking .Ranking-body ul li .rank {
+  margin-right: 10px;
+  width: 20px;
+  display: inline-block;
+}
+
+.Ranking .Ranking-body ul li img {
+  width: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.Ranking .Ranking-body ul li  {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+}
+
+.Ranking .Ranking-body ul li.rank-8  {
+  border-bottom: 1px solid #999;
+}
+
+.Ranking h3 {
+  font-size: 15px;
+  margin: 10px 0;
+}
+
+.Ranking-header {
+  overflow: hidden;
+  margin-bottom: 10px;
+}

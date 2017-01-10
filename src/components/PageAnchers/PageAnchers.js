@@ -19,6 +19,11 @@ class PageAnchers extends Component {
     return (
       <ul className="PageAnchers">
         {dateString}
+        <li>{
+          'ranking' === this.props.currentSection ?
+            <span>Ranking</span> :
+            <a href={`#ranking`}>Ranking</a>
+        }</li>
       </ul>
     );
   }

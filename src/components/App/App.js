@@ -3,6 +3,7 @@ import './App.css';
 import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js'
 import GamesDate from '../GamesDate/GamesDate.js'
+import Ranking from '../Ranking/Ranking.js'
 import { getJson } from '../../lib/utils'
 import { setGlobalState, getGlobalState, subscribe } from '../../lib/global-state';
 
@@ -50,6 +51,8 @@ class App extends Component {
       <div className="App">
         <Header lastUpdate={cacheData.lastUpdate}></Header>
         {gameDates}
+        <Ranking
+          timeStamps={gameTs} />
         <Footer></Footer>
       </div>
     );

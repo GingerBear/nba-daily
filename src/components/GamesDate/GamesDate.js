@@ -31,13 +31,13 @@ class GameDate extends Component {
     return (
       <div className="GamesDate" id={this.props.sectionId}>
         <div className="GamesDateHeader">
-          <PageAnchers gameDates={this.props.timeStamps} currentSection={dateString} />
           {gameDate.top10Video ?
             <a className="PlayButton PlayButtonWithText" onClick={this.playVideo} href={gameDate.top10Video}>
               <span className="top-10-text">Top 10</span>
               <icon className="PlayIcon"></icon>
             </a>
             : null}
+          <PageAnchers gameDates={this.props.timeStamps} currentSection={dateString} />
         </div>
 
         <GameList
