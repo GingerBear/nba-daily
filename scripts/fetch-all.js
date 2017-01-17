@@ -21,11 +21,12 @@ var datesGamesToFetch = Promise.all(datesToFetch.map(d => fetchGameWithVideoByDa
 var datesTop10ToFetch = getTop10ByDates(datesToFetch.map(d => d.format('YYYYMMDD')));
 var rankings = getRandings();
 
-Promise.all([
-  datesGamesToFetch,
-  datesTop10ToFetch,
-  rankings
-])
+Promise
+  .all([
+    datesGamesToFetch,
+    datesTop10ToFetch,
+    rankings
+  ])
   .then(result => {
     console.log(result);
     var gameDates = result[0];

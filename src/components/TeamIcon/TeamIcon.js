@@ -3,16 +3,36 @@ import { getGlobalState } from '../../lib/global-state';
 import './TeamIcon.css';
 
 class TeamIcon extends Component {
-  renderRank(rk) {
-    var rkNum = rk.replace('e', '').replace('w', '');
-    return <span className={`conf-${rk[0]}`}>{rkNum}</span>;
+  renderRank(teamCode) {
+    var rankings = getGlobalState().rankings;
+    var teamRank = null;
+    var teamRankDetail = null;
+    var conf = null;
+
+    if (rankings.east.find(t => t.teamCode === teamCode)) {
+      conf = 'e';
+      teamRank = rankings.east.findIndex(t => t.teamCode === teamCode);
+    } else {
+      conf = 'w';
+      teamRank = rankings.west.findIndex(t => t.teamCode === teamCode);
+    }
+
+    return (
+      <span className={`conf-${conf}`}>
+        {teamRank}
+      </span>
+    );
   }
   render() {
-    var rankings = getGlobalState().rankings;
     return (
       <div className='TeamIcon'>
-        {this.renderRank(rankings[this.props.teamInfo.triCode])}
-        <img src={`images/${this.props.teamInfo.triCode.toLowerCase()}.gif`} alt={this.props.teamInfo.triCode} />
+
+        {this.renderRank(this.props.teamInfo.triCode)}
+
+        <img
+          src={`images/${this.props.teamInfo.triCode.toLowerCase()}.gif`}
+          alt={this.props.teamInfo.triCode} />
+
         <span>
           {this.props.teamInfo.triCode}
           <span className="WinLoss">

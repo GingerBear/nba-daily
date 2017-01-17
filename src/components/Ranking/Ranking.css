@@ -2,6 +2,8 @@
   overflow: hidden;
   margin-bottom: 30px;
   padding-top: 10px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .Ranking .Ranking-body ul {
@@ -30,6 +32,25 @@
 
 .Ranking .Ranking-body ul li.rank-8  {
   border-bottom: 1px solid #999;
+}
+
+.Ranking-body .team-name {
+  width: 26px;
+  display: inline-block;
+}
+
+.Ranking-body .win-record {
+  color: #999;
+  margin-left: 3px;
+  font-size: 11px;
+  display: inline-block;
+  width: 38px;
+}
+
+.Ranking-body .behind {
+  margin-left: 3px;
+  font-size: 11px;
+  color: #ED074F;
 }
 
 .Ranking h3 {
