@@ -72,3 +72,7 @@
   padding: 3px;
   border-radius: 3px;
 }
+
+.GameItem .videoContainer video{
+  width: 100%;
+}

@@ -6,7 +6,6 @@ class TeamIcon extends Component {
   renderRank(teamCode) {
     var rankings = getGlobalState().rankings;
     var teamRank = null;
-    var teamRankDetail = null;
     var conf = null;
 
     if (rankings.east.find(t => t.teamCode === teamCode)) {
