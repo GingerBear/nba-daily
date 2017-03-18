@@ -30,4 +30,5 @@
   position: relative;
   bottom: 1px;
   margin-right: 5px;
+  pointer-events: none;
 }

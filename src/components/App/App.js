@@ -4,8 +4,10 @@ import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js'
 import GamesDate from '../GamesDate/GamesDate.js'
 import Ranking from '../Ranking/Ranking.js'
+import VideoPlayer from '../VideoPlayer/VideoPlayer.js'
+
 import { getJson } from '../../lib/utils'
-import { setGlobalState, getGlobalState, subscribe } from '../../lib/global-state';
+import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
 
 class App extends Component {
   constructor(pros) {
@@ -14,8 +16,13 @@ class App extends Component {
       data: null
     };
   }
+
   componentDidMount() {
     subscribe(this);
+
+    window.onhashchange = this.goToSection;
+    this.goToSection();
+
     var dataURL = 'https://dl.dropboxusercontent.com/s/i2tqoo6wtt7acjx/nba-data.json';
     return getJson(dataURL)
       .then(data => {
@@ -28,32 +35,45 @@ class App extends Component {
       });
   }
 
-  render() {
-    var cacheData = getGlobalState();
+  componentWillUnmount() {
+    unsubscribe(this);
+  }
 
-    if (!cacheData.lastUpdate) {
+  goToSection = () => {
+    setGlobalState({
+      currentSection: (location.hash || '').replace('#', '') || 'section-0'
+    });
+  }
+
+  render() {
+    var globalData = getGlobalState();
+
+    if (!globalData.lastUpdate) {
       return <p>Loading</p>
     }
 
-    var _gameDates = cacheData.gameDates;
+    var _gameDates = globalData.gameDates;
 
     var gameTs = _gameDates.map(d => d.timestamp);
     var gameDates = _gameDates.map((gameDate, i) => (
-      <GamesDate
-        key={i}
-        timeStamps={gameTs}
-        gameDate={gameDate}
-        sectionId={`section-${i}`}
+      globalData.currentSection === `section-${i}`
+        ? <GamesDate
+          key={i}
+          timeStamps={gameTs}
+          gameDate={gameDate}
+          sectionId={`section-${i}`}
         />
+        : null
 
     ));
     return (
       <div className="App">
-        <Header lastUpdate={cacheData.lastUpdate}></Header>
+        <Header lastUpdate={globalData.lastUpdate}></Header>
         {gameDates}
-        <Ranking
-          timeStamps={gameTs} />
+        <Ranking timeStamps={gameTs} />
         <Footer></Footer>
+
+        <VideoPlayer video={globalData.videoPlaying} />
       </div>
     );
   }

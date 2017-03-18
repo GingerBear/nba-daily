@@ -1,46 +1,19 @@
 import React, { Component } from 'react';
 import TeamIcon from '../TeamIcon/TeamIcon.js';
 import { datetime } from '../../lib/utils';
-import { getGlobalState, subscribe } from '../../lib/global-state';
+import { getGlobalState, setGlobalState } from '../../lib/global-state';
 import './GameItem.css'
 
 const isTouchDevice = 'ontouchstart' in document.documentElement;
-const isAndroid = window.navigator.userAgent.indexOf('Android') > -1;
 
 class GameItem extends Component {
-  constructor(props) {
-    super(props);
-    subscribe(this);
-  }
 
   playVideo = (e) => {
-    if (!isTouchDevice) {
-      return;
-    }
+    if (!isTouchDevice) return;
 
     e.preventDefault();
-
-    this.stopAllVideos();
-
-    this.videoPlayer = document.createElement('video');
-    this.videoPlayer.src = e.target.href;
-    this.videoPlayer.controls = true;
-    this.videoPlayer.addEventListener('ended', this.onVideoEnded, false);
-    this.videoPlayer.play();
-
-    if (isAndroid) {
-      this.refs.videoContainer.innerHTML = '';
-      this.refs.videoContainer.appendChild(this.videoPlayer);
-    }
-  }
-
-  onVideoEnded = (event) => {
-    this.videoPlayer.webkitExitFullscreen();
-  }
-
-  stopAllVideos() {
-    [].forEach.call(document.querySelectorAll('video'), (v) => {
-      v.remove();
+    setGlobalState({
+      videoPlaying: e.target.href
     });
   }
 
@@ -70,7 +43,7 @@ class GameItem extends Component {
           <div className="GameSide">
             <TeamIcon
               teamInfo={game.hTeam}
-              />
+            />
             <span className={hScoreClass}>
               {game.hTeam.score}
             </span>
@@ -82,7 +55,7 @@ class GameItem extends Component {
             </span>
             <TeamIcon
               teamInfo={game.vTeam}
-              />
+            />
           </div>
 
           <div className="GameRecap">
@@ -96,9 +69,6 @@ class GameItem extends Component {
         </div>
         {game.nugget.text &&
           <p>{game.nugget.text}</p>}
-
-        {isAndroid &&
-          <div ref="videoContainer" className="videoContainer"></div>}
 
       </div>
     );

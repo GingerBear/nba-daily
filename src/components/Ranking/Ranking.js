@@ -7,7 +7,8 @@ import './Ranking.css';
 class Ranking extends Component {
   render() {
 
-    var rankings = getGlobalState().rankings;
+    var { rankings, currentSection } = getGlobalState();
+    if (currentSection !== 'ranking') return null;
 
     return <div className="Ranking" id="ranking">
 

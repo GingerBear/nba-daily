@@ -2,26 +2,20 @@ import React, { Component } from 'react';
 import GameList from '../GameList/GameList.js'
 import PageAnchers from '../PageAnchers/PageAnchers.js'
 import { datetime } from '../../lib/utils'
+import { setGlobalState } from '../../lib/global-state';
 import './GamesDate.css'
+
+const isTouchDevice = 'ontouchstart' in document.documentElement;
 
 class GameDate extends Component {
 
   playVideo = (e) => {
-    var isTouchDevice = 'ontouchstart' in document.documentElement;
-    if (!isTouchDevice) {
-      return;
-    }
+    if (!isTouchDevice) return;
 
     e.preventDefault();
-
-    this.videoPlayer = document.createElement('video');
-    this.videoPlayer.src = e.target.href;
-    this.videoPlayer.addEventListener('ended', this.onVideoEnded, false);
-    this.videoPlayer.play();
-  }
-
-  onVideoEnded = (event) => {
-    this.videoPlayer.webkitExitFullscreen();
+    setGlobalState({
+      videoPlaying: e.target.href
+    });
   }
 
   render() {
@@ -42,7 +36,7 @@ class GameDate extends Component {
 
         <GameList
           games={gameDate.games}
-          />
+        />
 
       </div>
     );

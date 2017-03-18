@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
+import { setGlobalState, getGlobalState } from '../../lib/global-state';
 
 var options = [
   { value: 'atl', label: 'Atlanta Hawks' },
@@ -39,14 +39,6 @@ var options = [
 
 class FavTeam extends Component {
 
-  componentDidMount() {
-    subscribe(this);
-  }
-
-  componentWillUnmount() {
-    unsubscribe(this);
-  }
-
   handleChange = (value) => {
     setGlobalState({
       favTeams: value
@@ -61,7 +53,7 @@ class FavTeam extends Component {
         value={getGlobalState().favTeams}
         options={options}
         onChange={this.handleChange}
-        />
+      />
     );
   }
 }

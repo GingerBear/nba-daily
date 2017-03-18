@@ -13,8 +13,11 @@ function init() {
     favTeams: [],
     rankings: {},
     lastUpdate: null,
-    gameDates: []
-  }, globalState);
+    gameDates: [],
+  }, globalState, {
+      currentSection: null,
+      videoPlaying: null
+    });
 
   subscribers = [];
 }

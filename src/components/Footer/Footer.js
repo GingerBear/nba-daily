@@ -15,7 +15,7 @@ class Footer extends Component {
 
     return (
       <footer>
-        <div><a href="#header" className="GoToTop">Top</a></div>
+        <div><a href="#" className="GoToTop">Top</a></div>
 
         <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
         <FavTeam />
