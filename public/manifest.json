@@ -1,0 +1,13 @@
+{
+  "short_name": "nba-daily",
+  "name": "NBA Daily",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone"
+}
