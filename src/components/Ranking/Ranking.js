@@ -20,7 +20,7 @@ class Ranking extends Component {
       <div className="Ranking-body">
 
         <ul>
-          <li><span className="rank"></span>East</li>
+          <li><span className="rank"></span>West</li>
           {rankings.west.map((t, i) => (
             <li className={`rank-${i}`} key={i}>
               <span className="rank">{i + 1}</span>
@@ -33,7 +33,7 @@ class Ranking extends Component {
         </ul>
 
         <ul>
-          <li>West</li>
+          <li>East</li>
           {rankings.east.map((t, i) => (
             <li className={`rank-${i}`} key={i}>
               <img src={`images/${t.teamCode.toLowerCase()}.gif`} alt={t.teamCode} />
