@@ -18,7 +18,7 @@ class TeamIcon extends Component {
 
     return (
       <span className={`conf-${conf}`}>
-        {teamRank}
+        {teamRank + 1}
       </span>
     );
   }
