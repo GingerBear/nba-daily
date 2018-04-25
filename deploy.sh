@@ -1,5 +1,6 @@
 #!/bin/bash
 
+npm install
 npm run build
 git clone https://GingerBear:34d545d96b273a545f23e0389fc60d84c6b1e83b@github.com/GingerBear/gingerbear.github.io.git
 rm -rf gingerbear.github.io/nba
