@@ -73,7 +73,7 @@ class GameItem extends Component {
           </div>
         </div>
         <p>
-          {playoffsSummary} <br /> {gameNote}
+          {playoffsSummary} | {gameNote}
         </p>
       </div>
     );
