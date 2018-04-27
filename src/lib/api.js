@@ -1,7 +1,6 @@
-import { getJson } from "./utils";
+import { getJson } from './utils';
 
-var dataURL =
-  "https://dl.dropboxusercontent.com/s/i2tqoo6wtt7acjx/nba-data.json";
+var dataURL = 'https://dl.dropboxusercontent.com/s/kcwrqyr8455lsq6/nba-daily.json';
 
 export function getData() {
   return getJson(dataURL);

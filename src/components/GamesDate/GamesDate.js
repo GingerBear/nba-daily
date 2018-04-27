@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import GameList from "../GameList/GameList.js";
-import PageAnchers from "../PageAnchers/PageAnchers.js";
-import { datetime } from "../../lib/utils";
-import { setGlobalState } from "../../lib/global-state";
-import "./GamesDate.css";
+import React, { Component } from 'react';
+import GameList from '../GameList/GameList.js';
+import { datetime } from '../../lib/utils';
+import { setGlobalState } from '../../lib/global-state';
+import './GamesDate.css';
 
-const isTouchDevice = "ontouchstart" in document.documentElement;
+const isTouchDevice = 'ontouchstart' in document.documentElement;
 
 class GameDate extends Component {
   playVideo = e => {
@@ -21,7 +20,7 @@ class GameDate extends Component {
     var gameDate = this.props.gameDate;
     var dateString = datetime(new Date(+gameDate.timestamp))
       .calendar()
-      .split("at")[0]
+      .split('at')[0]
       .trim();
 
     return (
