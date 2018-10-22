@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
-import GamesDate from '../GamesDate/GamesDate.js';
 import Ranking from '../Ranking/Ranking.js';
 import VideoPlayer from '../VideoPlayer/VideoPlayer.js';
 import PageAnchers from '../PageAnchers/PageAnchers.js';
@@ -10,6 +9,7 @@ import moment from 'moment';
 
 import { getData } from '../../lib/api';
 import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
+import GameList from '../GameList/GameList';
 
 class App extends Component {
   constructor(pros) {
@@ -27,7 +27,6 @@ class App extends Component {
 
     return getData().then(data => {
       // set global state
-      data.gameDates = this.sortGames(data.gameDates);
       setGlobalState({
         lastUpdate: data.lastUpdate,
         gameDates: data.gameDates,
@@ -41,16 +40,10 @@ class App extends Component {
    * - 6am to 1pm: yesterday, today, tomorrow
    * - 1pm to 6am: today, yesterday, tomroow
    */
-  sortGames(games) {
-    const today = games[0];
-    const yesterdays = games[1];
+  getDefaultDate() {
     const currentHour = moment().hour();
     const isMorning = currentHour > 5 && currentHour <= 12;
-    if (isMorning) {
-      return [yesterdays, today, games[2]];
-    } else {
-      return [today, yesterdays, games[2]];
-    }
+    return isMorning ? 0 : 1;
   }
 
   componentWillUnmount() {
@@ -59,7 +52,8 @@ class App extends Component {
 
   goToSection = () => {
     setGlobalState({
-      currentSection: (window.location.hash || '').replace('#', '') || 'games'
+      currentSection:
+        (window.location.hash || '').replace('#', '') || `games-${this.getDefaultDate()}`
     });
   };
 
@@ -70,20 +64,25 @@ class App extends Component {
       return <p>Loading</p>;
     }
 
-    var _gameDates = globalData.gameDates;
-
-    var gameTs = _gameDates.map(d => d.timestamp);
-    var gameDates = _gameDates.map((gameDate, i) => (
-      <GamesDate key={i} timeStamps={gameTs} gameDate={gameDate} sectionId={`section-${i}`} />
+    var gameDates = globalData.gameDates.map((gameDate, i) => (
+      // <GamesDate key={i} gameDate={gameDate} />
+      <GameList key={i} games={gameDate.games} />
     ));
+
     return (
       <div className="App">
         <Header lastUpdate={globalData.lastUpdate} />
         <div className="anchers">
-          <PageAnchers currentSection={globalData.currentSection} />
+          <PageAnchers
+            gameDates={globalData.gameDates}
+            currentSection={globalData.currentSection}
+          />
         </div>
-        {globalData.currentSection === 'games' && gameDates}
-        {globalData.currentSection === 'ranking' && <Ranking timeStamps={gameTs} />}
+        {/* {globalData.currentSection === 'games-yesterday' && gameDates[0]}
+        {globalData.currentSection === 'games-today' && gameDates[1]}
+        {globalData.currentSection === 'games-tomorrow' && gameDates[3]} */}
+        {gameDates.filter((g, i) => globalData.currentSection === 'games-' + i)[0]}
+        {globalData.currentSection === 'ranking' && <Ranking />}
         <Footer />
 
         <VideoPlayer video={globalData.videoPlaying} />
