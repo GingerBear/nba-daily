@@ -15,7 +15,7 @@ class Footer extends Component {
     return (
       <footer>
         <div>
-          <a href="#" className="GoToTop">
+          <a href="/nba-daily" className="GoToTop">
             Top
           </a>
         </div>
