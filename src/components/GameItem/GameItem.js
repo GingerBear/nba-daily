@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import TeamIcon from "../TeamIcon/TeamIcon.js";
-import { datetime } from "../../lib/utils";
-import { getGlobalState, setGlobalState } from "../../lib/global-state";
-import "./GameItem.css";
+import React, { Component } from 'react';
+import TeamIcon from '../TeamIcon/TeamIcon.js';
+import { datetime } from '../../lib/utils';
+import { getGlobalState, setGlobalState } from '../../lib/global-state';
+import './GameItem.css';
 
-const isTouchDevice = "ontouchstart" in document.documentElement;
+const isTouchDevice = 'ontouchstart' in document.documentElement;
 
 class GameItem extends Component {
   playVideo = e => {
@@ -23,24 +23,24 @@ class GameItem extends Component {
     var dateTime = datetime(game.startTimeUTC).calendar();
     var isStilPlaying =
       (game.period.current < 4 && game.period.current > 0) ||
-      game.clock !== "" ||
+      game.clock !== '' ||
       (game.period.isEndOfPeriod || game.period.isHalftime);
-    var isEnded =
-      !isStilPlaying && (+game.hTeam.score !== 0 && +game.vTeam.score !== 0);
+    var isEnded = !isStilPlaying && (+game.hTeam.score !== 0 && +game.vTeam.score !== 0);
     var homeWin = +game.hTeam.score > +game.vTeam.score;
 
-    var hScoreClass = isEnded ? (homeWin ? "score win" : "score") : "score";
-    var vScoreClass = isEnded ? (homeWin ? "score" : "score win") : "score";
+    var hScoreClass = isEnded ? (homeWin ? 'score win' : 'score') : 'score';
+    var vScoreClass = isEnded ? (homeWin ? 'score' : 'score win') : 'score';
 
     var badge = isStilPlaying ? (
-      <span className="GameBadge">playing Q{game.period.current}...</span>
+      <span className="GameBadge">
+        playing Q{game.period.current}
+        ...
+      </span>
     ) : null;
 
     var isFavTeam = containsFavTeams(favTeams, [game.hTeam, game.vTeam]);
-    var GameItemClassName = "GameItem" + (isFavTeam ? " isFavTeam" : "");
-    var watch = (game.watch.broadcast.broadcasters.national || [])
-      .map(b => b.shortName)
-      .join("");
+    var GameItemClassName = 'GameItem' + (isFavTeam ? ' isFavTeam' : '');
+    var watch = (game.watch.broadcast.broadcasters.national || []).map(b => b.shortName).join('');
     var playoffsSummary = game.playoffs && game.playoffs.seriesSummaryText;
     var gameNote = game.nugget.text ? game.nugget.text : watch;
 
@@ -62,12 +62,8 @@ class GameItem extends Component {
 
           <div className="GameRecap">
             {game.recapLink ? (
-              <a
-                className="PlayButton"
-                onClick={this.playVideo}
-                href={game.recapLink}
-              >
-                <icon className="PlayIcon" />
+              <a className="PlayButton" onClick={this.playVideo} href={game.recapLink}>
+                <span className="PlayIcon" />
               </a>
             ) : null}
           </div>

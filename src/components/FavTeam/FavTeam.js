@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+// import 'react-select/dist/react-select.css';
 import { setGlobalState, getGlobalState } from '../../lib/global-state';
 
 var options = [
@@ -36,14 +36,12 @@ var options = [
   { value: 'was', label: 'Washington Wizards' }
 ];
 
-
 class FavTeam extends Component {
-
-  handleChange = (value) => {
+  handleChange = value => {
     setGlobalState({
       favTeams: value
     });
-  }
+  };
 
   render() {
     return (

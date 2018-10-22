@@ -1,13 +1,8 @@
-import React, { Component } from "react";
-import { datetime } from "../../lib/utils";
-import { getData } from "../../lib/api";
-import {
-  setGlobalState,
-  getGlobalState,
-  subscribe,
-  unsubscribe
-} from "../../lib/global-state";
-import "./Header.css";
+import React, { Component } from 'react';
+import { datetime } from '../../lib/utils';
+import { getData } from '../../lib/api';
+import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
+import './Header.css';
 
 class Header extends Component {
   componentDidMount() {
@@ -42,7 +37,7 @@ class Header extends Component {
         {globalData.isFetching ? (
           <span>loading...</span>
         ) : (
-          <a onClick={this.handleLogoPress} className="LastUpdate">
+          <a href="/#" onClick={this.handleLogoPress} className="LastUpdate">
             updated {lastUpdate}
           </a>
         )}

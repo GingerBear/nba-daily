@@ -34,7 +34,7 @@ class GameDate extends Component {
               href={gameDate.top10Video}
             >
               <span className="top-10-text">Top 10</span>
-              <icon className="PlayIcon" />
+              <span className="PlayIcon" />
             </a>
           ) : null}
         </div>

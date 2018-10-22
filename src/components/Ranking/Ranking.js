@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import { getGlobalState } from "../../lib/global-state";
-import _ from "lodash";
-import "./Ranking.css";
+import React, { Component } from 'react';
+import { getGlobalState } from '../../lib/global-state';
+import './Ranking.css';
 
 class Ranking extends Component {
   render() {
@@ -12,15 +11,13 @@ class Ranking extends Component {
         <div className="Ranking-body">
           <ul>
             <li>
-              <span className="rank" />West
+              <span className="rank" />
+              West
             </li>
             {rankings.west.map((t, i) => (
               <li className={`rank-${i}`} key={i}>
                 <span className="rank">{i + 1}</span>
-                <img
-                  src={`images/${t.teamCode.toLowerCase()}.gif`}
-                  alt={t.teamCode}
-                />
+                <img src={`images/${t.teamCode.toLowerCase()}.gif`} alt={t.teamCode} />
                 <span className="team-name">{t.teamCode}</span>
                 <span className="win-record">
                   ({t.win}-{t.loss})
@@ -34,10 +31,7 @@ class Ranking extends Component {
             <li>East</li>
             {rankings.east.map((t, i) => (
               <li className={`rank-${i}`} key={i}>
-                <img
-                  src={`images/${t.teamCode.toLowerCase()}.gif`}
-                  alt={t.teamCode}
-                />
+                <img src={`images/${t.teamCode.toLowerCase()}.gif`} alt={t.teamCode} />
                 <span className="team-name">{t.teamCode}</span>
                 <span className="win-record">
                   ({t.win}-{t.loss})
