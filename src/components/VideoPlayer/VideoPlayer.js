@@ -36,7 +36,7 @@ class VideoPlayer extends Component {
     if (vid) {
       this.playVideo(vid);
     } else {
-      if (this.videoPlayer) this.videoPlayer.remove();
+      if (this.videoPlayer) this.videoPlayer.pause();
       this.refs.videoContainer.innerHTML = '';
     }
   };
