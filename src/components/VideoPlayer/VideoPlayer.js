@@ -5,8 +5,7 @@ import './VideoPlayer.css';
 const isAndroid = window.navigator.userAgent.indexOf('Android') > -1;
 
 class VideoPlayer extends Component {
-
-  playVideo = (urlSrc) => {
+  playVideo = urlSrc => {
     this.videoPlayer = document.createElement('video');
     this.videoPlayer.src = urlSrc;
     this.videoPlayer.controls = true;
@@ -17,41 +16,48 @@ class VideoPlayer extends Component {
       this.refs.videoContainer.innerHTML = '';
       this.refs.videoContainer.appendChild(this.videoPlayer);
     }
-  }
+  };
 
-  onVideoEnded = (event) => {
+  onVideoEnded = event => {
     this.videoPlayer.webkitExitFullscreen();
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
-    this.retryPlay(nextProps.video);
+    if (nextProps.video !== this.props.video) {
+      this.retryPlay(nextProps.video);
+    }
   }
 
   componentDidMount() {
     this.retryPlay(this.props.video);
   }
 
-  retryPlay = (vid) => {
+  retryPlay = vid => {
     if (vid) {
       this.playVideo(vid);
     } else {
       if (this.videoPlayer) this.videoPlayer.remove();
       this.refs.videoContainer.innerHTML = '';
     }
-  }
+  };
 
-  close = (e) => {
+  close = e => {
     setGlobalState({
       videoPlaying: null
-    })
-  }
+    });
+  };
 
   render() {
-    return <div>
-      <div ref="videoContainer" className="videoContainer"></div>
-      {this.props.video &&
-        <button className="videoCloseButton" onClick={this.close}>&times;</button>}
-    </div>;
+    return (
+      <div className="video-play-section">
+        <div ref="videoContainer" className="videoContainer" />
+        {this.props.video && (
+          <button className="videoCloseButton" onClick={this.close}>
+            &times;
+          </button>
+        )}
+      </div>
+    );
   }
 }
 

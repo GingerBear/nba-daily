@@ -37,9 +37,9 @@ class Header extends Component {
         {globalData.isFetching ? (
           <span>loading...</span>
         ) : (
-          <a href="/#" onClick={this.handleLogoPress} className="LastUpdate">
+          <button onClick={this.handleLogoPress} className="LastUpdate">
             updated {lastUpdate}
-          </a>
+          </button>
         )}
       </header>
     );

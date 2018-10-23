@@ -10,6 +10,7 @@ import moment from 'moment';
 import { getData } from '../../lib/api';
 import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
 import GameList from '../GameList/GameList';
+import FavTeam from '../FavTeam/FavTeam';
 
 class App extends Component {
   constructor(pros) {
@@ -65,7 +66,6 @@ class App extends Component {
     }
 
     var gameDates = globalData.gameDates.map((gameDate, i) => (
-      // <GamesDate key={i} gameDate={gameDate} />
       <GameList key={i} games={gameDate.games} />
     ));
 
@@ -78,11 +78,14 @@ class App extends Component {
             currentSection={globalData.currentSection}
           />
         </div>
-        {/* {globalData.currentSection === 'games-yesterday' && gameDates[0]}
-        {globalData.currentSection === 'games-today' && gameDates[1]}
-        {globalData.currentSection === 'games-tomorrow' && gameDates[3]} */}
         {gameDates.filter((g, i) => globalData.currentSection === 'games-' + i)[0]}
         {globalData.currentSection === 'ranking' && <Ranking />}
+        {globalData.currentSection === 'fav' && (
+          <div className="fav-teams-container">
+            <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
+            <FavTeam />
+          </div>
+        )}
         <Footer />
 
         <VideoPlayer video={globalData.videoPlaying} />

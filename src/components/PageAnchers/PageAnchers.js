@@ -29,6 +29,7 @@ class PageAnchers extends Component {
             <a href={`#ranking`}>Ranking</a>
           )}
         </li>
+        <li>{'fav' === this.props.currentSection ? <span>Fav</span> : <a href={`#fav`}>Fav</a>}</li>
       </ul>
     );
   }

@@ -46,8 +46,9 @@ class FavTeam extends Component {
   render() {
     return (
       <Select
-        name="form-field-name"
-        multi={true}
+        name="fav-teams"
+        isMulti
+        closeMenuOnSelect={false}
         value={getGlobalState().favTeams}
         options={options}
         onChange={this.handleChange}

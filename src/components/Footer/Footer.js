@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FavTeam from '../FavTeam/FavTeam';
 import './Footer.css';
 
 class Footer extends Component {
@@ -14,14 +13,6 @@ class Footer extends Component {
 
     return (
       <footer>
-        <div>
-          <a href="/nba-daily" className="GoToTop">
-            Top
-          </a>
-        </div>
-
-        <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
-        <FavTeam />
         <br />
         <ul>
           <li>
