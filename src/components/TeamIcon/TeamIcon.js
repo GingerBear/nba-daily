@@ -1,46 +1,39 @@
-import React, { Component } from 'react';
-import { getGlobalState } from '../../lib/global-state';
+import React from 'react';
 import './TeamIcon.css';
 
-class TeamIcon extends Component {
-  renderRank(teamCode) {
-    var rankings = getGlobalState().rankings;
-    var teamRank = null;
-    var conf = null;
+function TeamIcon(props) {
+  function renderRank(teamCode) {
+    let teamRank = null;
+    let conf = null;
 
-    if (rankings.east.find(t => t.teamCode === teamCode)) {
+    if (props.rankings.east.find(t => t.teamCode === teamCode)) {
       conf = 'e';
-      teamRank = rankings.east.findIndex(t => t.teamCode === teamCode);
+      teamRank = props.rankings.east.findIndex(t => t.teamCode === teamCode);
     } else {
       conf = 'w';
-      teamRank = rankings.west.findIndex(t => t.teamCode === teamCode);
+      teamRank = props.rankings.west.findIndex(t => t.teamCode === teamCode);
     }
 
-    return (
-      <span className={`conf-${conf}`}>
-        {teamRank + 1}
-      </span>
-    );
+    return <span className={`conf-${conf}`}>{teamRank + 1}</span>;
   }
-  render() {
-    return (
-      <div className='TeamIcon'>
 
-        {this.renderRank(this.props.teamInfo.triCode)}
+  return (
+    <div className="TeamIcon">
+      {renderRank(props.teamInfo.triCode)}
 
-        <img
-          src={`images/${this.props.teamInfo.triCode.toLowerCase()}.gif`}
-          alt={this.props.teamInfo.triCode} />
+      <img
+        src={`images/${props.teamInfo.triCode.toLowerCase()}.gif`}
+        alt={props.teamInfo.triCode}
+      />
 
-        <span>
-          {this.props.teamInfo.triCode}
-          <span className="WinLoss">
-            ({this.props.teamInfo.win}-{this.props.teamInfo.loss})
-          </span>
+      <span>
+        {props.teamInfo.triCode}
+        <span className="WinLoss">
+          ({props.teamInfo.win}-{props.teamInfo.loss})
         </span>
-      </div>
-    );
-  }
+      </span>
+    </div>
+  );
 }
 
 export default TeamIcon;

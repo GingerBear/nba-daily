@@ -9,10 +9,14 @@
   margin: 0;
 }
 
-.GameItem.isFavTeam {
+.GameItem.fav-level-1 {
   position: relative;
-  border: 1px solid #999;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.GameItem.fav-level-2 {
+  position: relative;
+  box-shadow: 0 3px 8px rgba(64, 120, 192, 0.5), 0 0 20px rgba(64, 120, 192, 0.5);
 }
 
 .GameSide {
@@ -73,6 +77,6 @@
   border-radius: 3px;
 }
 
-.GameItem .videoContainer video{
+.GameItem .videoContainer video {
   width: 100%;
 }

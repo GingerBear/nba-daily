@@ -1,38 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { datetime } from '../../lib/utils';
 import './PageAnchers.css';
 
-class PageAnchers extends Component {
-  render() {
-    return (
-      <ul className="PageAnchers">
-        {this.props.gameDates.map((gameDate, i) => {
-          const date = datetime(new Date(+gameDate.timestamp))
-            .calendar()
-            .split('at')[0]
-            .trim();
+function PageAnchers(props) {
+  return (
+    <ul className="PageAnchers">
+      {props.gameDates.map((gameDate, i) => {
+        const date = datetime(new Date(+gameDate.timestamp))
+          .calendar()
+          .split('at')[0]
+          .trim();
 
-          return (
-            <li key={i}>
-              {`games-${i}` === this.props.currentSection ? (
-                <span>{date}</span>
-              ) : (
-                <a href={`#games-${i}`}>{date}</a>
-              )}
-            </li>
-          );
-        })}
-        <li>
-          {'ranking' === this.props.currentSection ? (
-            <span>Ranking</span>
-          ) : (
-            <a href={`#ranking`}>Ranking</a>
-          )}
-        </li>
-        <li>{'fav' === this.props.currentSection ? <span>Fav</span> : <a href={`#fav`}>Fav</a>}</li>
-      </ul>
-    );
-  }
+        return (
+          <li key={i}>
+            {`games-${i}` === props.currentSection ? (
+              <span>{date}</span>
+            ) : (
+              <a href={`#games-${i}`}>{date}</a>
+            )}
+          </li>
+        );
+      })}
+      <li>
+        {'ranking' === props.currentSection ? (
+          <span>Ranking</span>
+        ) : (
+          <a href={`#ranking`}>Ranking</a>
+        )}
+      </li>
+      <li>{'fav' === props.currentSection ? <span>Fav</span> : <a href={`#fav`}>Fav</a>}</li>
+    </ul>
+  );
 }
 
 export default PageAnchers;
