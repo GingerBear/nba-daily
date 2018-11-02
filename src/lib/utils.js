@@ -33,8 +33,10 @@ export function datetime(dateStr, format) {
 export function getInitialData() {
   let favTeams;
   try {
-    favTeams = JSON.parse(localStorage.getItem(FAV_TEAM_KEY));
-  } catch (e) {}
+    favTeams = JSON.parse(localStorage.getItem(FAV_TEAM_KEY)) || [];
+  } catch (e) {
+    favTeams = [];
+  }
 
   return {
     rankings: {},
