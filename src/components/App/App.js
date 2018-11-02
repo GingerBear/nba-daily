@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
@@ -8,90 +8,87 @@ import PageAnchers from '../PageAnchers/PageAnchers.js';
 import moment from 'moment';
 
 import { getData } from '../../lib/api';
-import { setGlobalState, getGlobalState, subscribe, unsubscribe } from '../../lib/global-state';
-import GameList from '../GameList/GameList';
+import { getInitialData, gameFavLevel, FAV_TEAM_KEY } from '../../lib/utils';
 import FavTeam from '../FavTeam/FavTeam';
+import GameItem from '../GameItem/GameItem';
 
-class App extends Component {
-  constructor(pros) {
-    super(pros);
-    this.state = {
-      data: null
-    };
-  }
+function App() {
+  const [data, setData] = useState(getInitialData());
+  const [currentSection, setCurrentSection] = useState(getCurrentSection());
 
-  componentDidMount() {
-    subscribe(this);
-
-    window.onhashchange = this.goToSection;
-    this.goToSection();
-
-    return getData().then(data => {
-      // set global state
-      setGlobalState({
-        lastUpdate: data.lastUpdate,
-        gameDates: data.gameDates,
-        rankings: data.rankings
-      });
+  function loadData() {
+    getData().then(newData => {
+      setData({ ...data, ...newData });
     });
   }
 
-  /**
-   * if current
-   * - 6am to 1pm: yesterday, today, tomorrow
-   * - 1pm to 6am: today, yesterday, tomroow
-   */
-  getDefaultDate() {
+  function getCurrentSection() {
+    return (window.location.hash || '').replace('#', '') || `games-${getDefaultDate()}`;
+  }
+
+  function handleFavChange(favTeams) {
+    localStorage.setItem(FAV_TEAM_KEY, JSON.stringify(favTeams));
+    setData({ ...data, favTeams });
+  }
+
+  function getDefaultDate() {
     const currentHour = moment().hour();
     const isMorning = currentHour > 5 && currentHour <= 12;
     return isMorning ? 0 : 1;
   }
 
-  componentWillUnmount() {
-    unsubscribe(this);
+  function playVideo(videoUrl) {
+    setData({ ...data, videoPlaying: videoUrl });
   }
 
-  goToSection = () => {
-    setGlobalState({
-      currentSection:
-        (window.location.hash || '').replace('#', '') || `games-${this.getDefaultDate()}`
-    });
-  };
+  function stopVideo() {
+    setData({ ...data, videoPlaying: null });
+  }
 
-  render() {
-    var globalData = getGlobalState();
+  useEffect(() => {
+    loadData();
+    window.onhashchange = () => setCurrentSection(getCurrentSection());
+  }, []);
 
-    if (!globalData.lastUpdate) {
-      return <p>Loading</p>;
-    }
+  if (!data.lastUpdate) {
+    return <p>Loading</p>;
+  }
 
-    var gameDates = globalData.gameDates.map((gameDate, i) => (
-      <GameList key={i} games={gameDate.games} />
-    ));
-
-    return (
-      <div className="App">
-        <Header lastUpdate={globalData.lastUpdate} />
-        <div className="anchers">
-          <PageAnchers
-            gameDates={globalData.gameDates}
-            currentSection={globalData.currentSection}
-          />
-        </div>
-        {gameDates.filter((g, i) => globalData.currentSection === 'games-' + i)[0]}
-        {globalData.currentSection === 'ranking' && <Ranking />}
-        {globalData.currentSection === 'fav' && (
-          <div className="fav-teams-container">
-            <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
-            <FavTeam />
-          </div>
-        )}
-        <Footer />
-
-        <VideoPlayer video={globalData.videoPlaying} />
+  return (
+    <div className="App">
+      <Header lastUpdate={data.lastUpdate} onUpdate={loadData} />
+      <div className="anchers">
+        <PageAnchers gameDates={data.gameDates} currentSection={currentSection} />
       </div>
-    );
-  }
+
+      {data.gameDates
+        .map((gameDate, i) => (
+          <ul className="game-list">
+            {gameDate.games.map((game, i) => (
+              <li key={i}>
+                <GameItem
+                  game={game}
+                  rankings={data.rankings}
+                  onPlay={playVideo}
+                  favLevel={gameFavLevel(data.favTeams, [game.hTeam, game.vTeam])}
+                />
+              </li>
+            ))}
+          </ul>
+        ))
+        .find((g, i) => currentSection === 'games-' + i)}
+      {currentSection === 'ranking' && <Ranking rankings={data.rankings} />}
+      {currentSection === 'fav' && (
+        <div className="fav-teams-container">
+          <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
+          <FavTeam favTeams={data.favTeams} onChange={handleFavChange} />
+        </div>
+      )}
+      <Footer />
+
+      <VideoPlayer video={data.videoPlaying} onClose={stopVideo} />
+    </div>
+  );
 }
 
 export default App;

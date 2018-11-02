@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { setGlobalState } from '../../lib/global-state';
 import './VideoPlayer.css';
 
 const isAndroid = window.navigator.userAgent.indexOf('Android') > -1;
@@ -41,18 +40,12 @@ class VideoPlayer extends Component {
     }
   };
 
-  close = e => {
-    setGlobalState({
-      videoPlaying: null
-    });
-  };
-
   render() {
     return (
       <div className="video-play-section">
         <div ref="videoContainer" className="videoContainer" />
         {this.props.video && (
-          <button className="videoCloseButton" onClick={this.close}>
+          <button className="videoCloseButton" onClick={this.props.onClose}>
             &times;
           </button>
         )}

@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Select from 'react-select';
-// import 'react-select/dist/react-select.css';
-import { setGlobalState, getGlobalState } from '../../lib/global-state';
 
 var options = [
   { value: 'atl', label: 'Atlanta Hawks' },
@@ -36,25 +34,17 @@ var options = [
   { value: 'was', label: 'Washington Wizards' }
 ];
 
-class FavTeam extends Component {
-  handleChange = value => {
-    setGlobalState({
-      favTeams: value
-    });
-  };
-
-  render() {
-    return (
-      <Select
-        name="fav-teams"
-        isMulti
-        closeMenuOnSelect={false}
-        value={getGlobalState().favTeams}
-        options={options}
-        onChange={this.handleChange}
-      />
-    );
-  }
+function FavTeam(props) {
+  return (
+    <Select
+      name="fav-teams"
+      isMulti
+      closeMenuOnSelect={false}
+      value={props.favTeams}
+      options={options}
+      onChange={props.onChange}
+    />
+  );
 }
 
 export default FavTeam;
