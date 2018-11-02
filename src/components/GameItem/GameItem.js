@@ -3,11 +3,8 @@ import TeamIcon from '../TeamIcon/TeamIcon.js';
 import { datetime } from '../../lib/utils';
 import './GameItem.css';
 
-const isTouchDevice = 'ontouchstart' in document.documentElement;
-
 function GameItem(props) {
   function playVideo(e) {
-    if (!isTouchDevice) return;
     e.preventDefault();
     props.onPlay(e.target.href);
   }

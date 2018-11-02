@@ -29,6 +29,10 @@ li {
 }
 
 .PlayButton:active {
+  background: #eee;
+}
+
+.PlayButton:active {
   background-color: #eee;
 }
 
@@ -46,6 +50,22 @@ li {
   width: 10px;
   height: 20px;
   margin-left: 2px;
+  vertical-align: bottom;
+}
+
+.PlayAllButton {
+  color: #999;
+  font-size: 15px;
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+}
+.PlayAllButton:active {
+  background: #eee;
 }
 
 span {

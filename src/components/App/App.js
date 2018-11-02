@@ -38,11 +38,16 @@ function App() {
   }
 
   function playVideo(videoUrl) {
-    setData({ ...data, videoPlaying: videoUrl });
+    window.location.href = '#player';
+    setData({ ...data, playingVideos: [videoUrl] });
   }
 
-  function stopVideo() {
-    setData({ ...data, videoPlaying: null });
+  function playAll(gameDate) {
+    return () => {
+      // window.location.href = '#player';
+      const videos = gameDate.games.map(g => g.recapLink).filter(Boolean);
+      setData({ ...data, playingVideos: videos });
+    };
   }
 
   useEffect(() => {
@@ -52,6 +57,13 @@ function App() {
 
   if (!data.lastUpdate) {
     return <p>Loading</p>;
+  }
+
+  if (currentSection === 'player') {
+    if (!data.playingVideos) {
+      return (window.location.href = '#');
+    }
+    return <VideoPlayer videos={data.playingVideos} />;
   }
 
   return (
@@ -64,6 +76,13 @@ function App() {
       {data.gameDates
         .map((gameDate, i) => (
           <ul className="game-list">
+            {gameDate.games.map(g => g.recapLink).filter(Boolean).length > 0 && (
+              <li className="play-all">
+                <a className="PlayAllButton" onClick={playAll(gameDate)} href={'#player'}>
+                  + <span className="PlayIcon" />
+                </a>
+              </li>
+            )}
             {gameDate.games.map((game, i) => (
               <li key={i}>
                 <GameItem
@@ -85,8 +104,6 @@ function App() {
         </div>
       )}
       <Footer />
-
-      <VideoPlayer video={data.videoPlaying} onClose={stopVideo} />
     </div>
   );
 }
