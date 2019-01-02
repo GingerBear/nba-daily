@@ -1,8 +1,8 @@
 .TeamIcon {
   display: inline-block;
-  text-align: center;
+  text-align: left;
   position: relative;
-  width: 70px;
+  width: 50px;
 }
 
 .TeamIcon > span {
@@ -14,17 +14,12 @@
 .TeamIcon img {
   width: 35px;
 }
-
-.TeamIcon .WinLoss {
-  margin-left: 2px;
-  color: #999;
-}
-
-.TeamIcon .conf-w, .TeamIcon .conf-e {
+.TeamIcon .conf-w,
+.TeamIcon .conf-e {
   display: inline-block;
   position: absolute;
-  top: 0;
-  right: -5px;
+  bottom: 0;
+  right: 0;
   font-size: 10px;
   color: white;
   width: 15px;
@@ -36,9 +31,9 @@
 }
 
 .TeamIcon .conf-w {
-  background-color: #006BB6;
+  background-color: #006bb6;
 }
 
 .TeamIcon .conf-e {
-  background-color: #ED074F;
+  background-color: #ed074f;
 }

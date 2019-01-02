@@ -25,13 +25,6 @@ function TeamIcon(props) {
         src={`images/${props.teamInfo.triCode.toLowerCase()}.gif`}
         alt={props.teamInfo.triCode}
       />
-
-      <span>
-        {props.teamInfo.triCode}
-        <span className="WinLoss">
-          ({props.teamInfo.win}-{props.teamInfo.loss})
-        </span>
-      </span>
     </div>
   );
 }

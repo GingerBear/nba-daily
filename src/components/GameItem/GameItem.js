@@ -10,7 +10,7 @@ function GameItem(props) {
   }
 
   const game = props.game;
-  const dateTime = datetime(game.startTimeUTC).calendar();
+  const dateTime = datetime(game.startTimeUTC).format('LT');
   const isStilPlaying =
     (game.period.current < 4 && game.period.current > 0) ||
     game.clock !== '' ||
@@ -30,13 +30,16 @@ function GameItem(props) {
 
   const gameItemClassName = `GameItem fav-level-${props.favLevel}`;
   const watch = (game.watch.broadcast.broadcasters.national || []).map(b => b.shortName).join('');
-  const playoffsSummary = game.playoffs && game.playoffs.seriesSummaryText;
-  const gameNote = game.nugget.text ? game.nugget.text : watch;
+  const playoffsSummary = (game.playoffs && game.playoffs.seriesSummaryText) || '';
+  const gameNote = [playoffsSummary, game.nugget.text ? game.nugget.text : watch]
+    .filter(Boolean)
+    .join(' | ');
 
   return (
     <div className={gameItemClassName}>
       <div className="GameDate">
         {dateTime} {badge}
+        {gameNote ? <p>{gameNote}</p> : null}
       </div>
       <div className="line">
         <div className="GameSide">
@@ -57,9 +60,6 @@ function GameItem(props) {
           ) : null}
         </div>
       </div>
-      <p>
-        {playoffsSummary} | {gameNote}
-      </p>
     </div>
   );
 }

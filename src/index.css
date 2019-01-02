@@ -19,8 +19,6 @@ li {
   font-size: 25px;
   width: 40px;
   height: 40px;
-  border: 1px solid #ccc;
-  border-radius: 25px;
   text-decoration: none;
   box-sizing: border-box;
   display: flex;
@@ -58,7 +56,6 @@ li {
   font-size: 15px;
   padding: 5px 20px;
   border: 1px solid #ccc;
-  border-radius: 25px;
   text-decoration: none;
   box-sizing: border-box;
   display: inline-block;

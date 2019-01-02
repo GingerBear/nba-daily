@@ -33,7 +33,7 @@ function App() {
 
   function getDefaultDate() {
     const currentHour = moment().hour();
-    const isMorning = currentHour > 5 && currentHour <= 12;
+    const isMorning = currentHour >= 0 && currentHour <= 12;
     return isMorning ? 0 : 1;
   }
 
@@ -79,7 +79,7 @@ function App() {
             {gameDate.games.map(g => g.recapLink).filter(Boolean).length > 0 && (
               <li className="play-all">
                 <a className="PlayAllButton" onClick={playAll(gameDate)} href={'#player'}>
-                  + <span className="PlayIcon" />
+                  <span className="PlayIcon" /> All
                 </a>
               </li>
             )}

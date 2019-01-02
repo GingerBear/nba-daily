@@ -1,6 +1,5 @@
 .GameItem {
   margin-bottom: 15px;
-  border: 1px solid #ccc;
 }
 
 .GameItem .line {
@@ -9,14 +8,21 @@
   margin: 0;
 }
 
-.GameItem.fav-level-1 {
-  position: relative;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);
+.GameItem .GameDate {
+  padding: 5px;
+  font-size: 13px;
+  color: #555;
 }
 
-.GameItem.fav-level-2 {
+.GameItem.fav-level-1 .GameDate {
   position: relative;
-  box-shadow: 0 3px 8px rgba(64, 120, 192, 0.5), 0 0 20px rgba(64, 120, 192, 0.5);
+  color: #4078c0;
+}
+
+.GameItem.fav-level-2 .GameDate {
+  position: relative;
+  color: #4078c0;
+  font-weight: bold;
 }
 
 .GameSide {
@@ -51,10 +57,10 @@
 .GameItem p {
   margin: 0;
   color: #555;
-  font-size: 12px;
-  padding: 5px;
-  background-color: #f8f8f8;
-  border-top: 1px solid #ccc;
+  font-size: 11px;
+  padding: 0 5px;
+  display: inline;
+  font-weight: normal;
 }
 
 .GameRecap {
@@ -62,13 +68,6 @@
   align-items: center;
   width: 50px;
   justify-content: flex-end;
-}
-
-.GameItem .GameDate {
-  padding: 5px;
-  font-size: 12px;
-  border-bottom: 1px solid #ccc;
-  color: #555;
 }
 
 .GameBadge {
