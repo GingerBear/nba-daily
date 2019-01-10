@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 
-export const FAV_TEAM_KEY = 'nbaDailyfavTeams';
+export const FAV_TEAM_KEY = 'nbaDailyfavTeams2';
 
 export function getJson(url) {
   return fetch(url, {
@@ -47,9 +47,8 @@ export function getInitialData() {
 }
 
 export function gameFavLevel(favTeams, gameTeams) {
-  const favCodes = favTeams.map(f => f.value);
-  const teamA = favCodes.indexOf(gameTeams[0].triCode.toLowerCase()) > -1 ? 1 : 0;
-  const teamB = favCodes.indexOf(gameTeams[1].triCode.toLowerCase()) > -1 ? 1 : 0;
+  const teamA = favTeams.indexOf(gameTeams[0].triCode) > -1 ? 1 : 0;
+  const teamB = favTeams.indexOf(gameTeams[1].triCode) > -1 ? 1 : 0;
 
   return teamA + teamB;
 }

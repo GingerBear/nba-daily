@@ -28,7 +28,7 @@ function PageAnchers(props) {
           <a href={`#ranking`}>Ranking</a>
         )}
       </li>
-      <li>{'fav' === props.currentSection ? <span>Fav</span> : <a href={`#fav`}>Fav</a>}</li>
+      {/* <li>{'fav' === props.currentSection ? <span>Fav</span> : <a href={`#fav`}>Fav</a>}</li> */}
     </ul>
   );
 }

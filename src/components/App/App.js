@@ -9,7 +9,6 @@ import moment from 'moment';
 
 import { getData } from '../../lib/api';
 import { getInitialData, gameFavLevel, FAV_TEAM_KEY } from '../../lib/utils';
-import FavTeam from '../FavTeam/FavTeam';
 import GameItem from '../GameItem/GameItem';
 
 function App() {
@@ -44,7 +43,6 @@ function App() {
 
   function playAll(gameDate) {
     return () => {
-      // window.location.href = '#player';
       const videos = gameDate.games.map(g => g.recapLink).filter(Boolean);
       setData({ ...data, playingVideos: videos });
     };
@@ -96,12 +94,8 @@ function App() {
           </ul>
         ))
         .find((g, i) => currentSection === 'games-' + i)}
-      {currentSection === 'ranking' && <Ranking rankings={data.rankings} />}
-      {currentSection === 'fav' && (
-        <div className="fav-teams-container">
-          <h4 style={{ margin: '10px 0' }}>Fav Teams</h4>
-          <FavTeam favTeams={data.favTeams} onChange={handleFavChange} />
-        </div>
+      {currentSection === 'ranking' && (
+        <Ranking rankings={data.rankings} favTeams={data.favTeams} onFavChange={handleFavChange} />
       )}
       <Footer />
     </div>
