@@ -3,8 +3,22 @@
 }
 
 .anchers {
+  bottom: 0;
+  right: 0;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+  padding-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .anchers {
+    position: fixed;
+    border-top: 1px solid #eee;
+  }
 }
 
 .fav-teams-container {
