@@ -11,13 +11,11 @@ function PageAnchers(props) {
           .split('at')[0]
           .trim();
 
+        const selected = `games-${i}` === props.currentSection;
+
         return (
-          <li key={i}>
-            {`games-${i}` === props.currentSection ? (
-              <span>{date}</span>
-            ) : (
-              <a href={`#games-${i}`}>{date}</a>
-            )}
+          <li className={selected ? 'selected' : ''} key={i}>
+            {selected ? <span>{date}</span> : <a href={`#games-${i}`}>{date}</a>}
           </li>
         );
       })}

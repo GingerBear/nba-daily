@@ -54,7 +54,15 @@ function App() {
   }, []);
 
   if (!data.lastUpdate) {
-    return <p>Loading</p>;
+    return (
+      <p
+        style={{
+          margin: 20
+        }}
+      >
+        Loading...
+      </p>
+    );
   }
 
   if (currentSection === 'player') {

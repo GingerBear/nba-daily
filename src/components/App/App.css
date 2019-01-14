@@ -3,21 +3,42 @@
 }
 
 .anchers {
+  max-width: 400px;
+  margin: 0 auto;
   bottom: 0;
   right: 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   background: white;
-  background: rgba(255, 255, 255, 0.8);
   z-index: 999;
-  padding-right: 20px;
 }
 
 @media only screen and (max-width: 600px) {
   .anchers {
     position: fixed;
     border-top: 1px solid #eee;
+    padding-right: 20px;
+    box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .anchers .PageAnchers {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .anchers .PageAnchers li {
+    width: 70px;
+    text-align: center;
+    border-right: 1px solid #eee;
+  }
+
+  .anchers .PageAnchers li.selected {
+    background: #eee;
+  }
+
+  .anchers .PageAnchers li:first-of-type {
+    border-left: 1px solid #eee;
   }
 }
 

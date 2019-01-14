@@ -1,19 +1,18 @@
 .PageAnchers {
   display: flex;
-  margin-top: 2px;
 }
 
-
-.PageAnchers li a, .PageAnchers li span {
+.PageAnchers li a,
+.PageAnchers li span {
   color: #4078c0;
   font-size: 13px;
   padding: 10px 5px;
   display: inline-block;
+  text-decoration: none;
 }
 
 .PageAnchers li span {
   color: #555;
-  font-weight: bold;
 }
 
 .Ranking-header h3 {
