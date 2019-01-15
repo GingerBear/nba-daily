@@ -17,9 +17,8 @@
 @media only screen and (max-width: 600px) {
   .anchers {
     position: fixed;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ddd;
     padding-right: 20px;
-    box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   }
 
   .anchers .PageAnchers {
